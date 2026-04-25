@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 
 const navItems = [
   { href: "/", label: "Beranda" },
@@ -10,10 +11,16 @@ const navItems = [
 export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-emerald-50 bg-white/80 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-4 sm:px-6 lg:px-8">
+      <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-2 sm:px-6 lg:px-8">
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600 text-xs font-black text-white shadow-lg shadow-emerald-200 group-hover:scale-105 transition-transform">
-            WFC
+          <div className="relative h-20 w-20 group-hover:scale-105 transition-transform">
+            <Image
+              src="/logo-wfc.png"
+              alt="WFC Jogja Logo"
+              fill
+              className="object-contain"
+              priority
+            />
           </div>
           <div>
             <p className="text-base font-black tracking-tight text-emerald-950">

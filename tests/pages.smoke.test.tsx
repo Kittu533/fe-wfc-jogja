@@ -20,16 +20,18 @@ describe("app pages smoke", () => {
 
     expect(
       screen.getByRole("heading", {
-        name: /jogja wfc yang proper,\s*bukan sekadar estetik/i,
+        name: /nugas jadi\s*sat-set\s*&\s*anti-drama/i,
       }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", {
-        name: /spot cepat buat dicoba duluan/i,
+        name: /gas ke sini dulu,\s*biar gak bingung/i,
       }),
     ).toBeInTheDocument();
     expect(
-      screen.getByText(/pilih jalur cepatmu/i),
+      screen.getByRole("heading", {
+        name: /lo lagi mau ngapain/i,
+      }),
     ).toBeInTheDocument();
   });
 

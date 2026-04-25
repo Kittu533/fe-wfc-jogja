@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Globe, Camera, Send } from "lucide-react";
 
 export function SiteFooter() {
@@ -8,8 +9,13 @@ export function SiteFooter() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-8">
           <div className="col-span-1 md:col-span-2">
             <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-600 text-xs font-black text-white">
-                WFC
+              <div className="relative h-32 w-32">
+                <Image
+                  src="/logo-wfc.png"
+                  alt="WFC Jogja Logo"
+                  fill
+                  className="object-contain"
+                />
               </div>
               <span className="text-xl font-black tracking-tight text-emerald-950">WFC Jogja</span>
             </Link>

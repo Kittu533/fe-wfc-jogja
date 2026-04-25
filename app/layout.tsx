@@ -3,6 +3,7 @@ import { Plus_Jakarta_Sans } from "next/font/google";
 import "leaflet/dist/leaflet.css";
 import "./globals.css";
 import { AppShell } from "@/components/app-shell";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 
 const plusJakartaSans = Plus_Jakarta_Sans({
   variable: "--font-display",
@@ -11,12 +12,12 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: "WFC Jogja",
-    template: "%s | WFC Jogja",
+    default: SITE_NAME,
+    template: `%s | ${SITE_NAME}`,
   },
-  description:
-    "Panduan work-friendly cafe di Jogja untuk nugas, meeting, nongkrong santai, dan cari spot dengan wifi yang benar-benar layak.",
+  description: SITE_DESCRIPTION,
 };
 
 export default function RootLayout({
