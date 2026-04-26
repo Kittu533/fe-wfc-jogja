@@ -8,7 +8,7 @@ export function RatingStars({ value, compact = false }: RatingStarsProps) {
 
   return (
     <div className="flex items-center gap-2">
-      <div className="flex items-center gap-1 text-[color:var(--gold)]">
+      <div className="flex items-center gap-1 text-amber-500">
         {stars.map((star) => {
           const active = star <= Math.round(value);
           return (

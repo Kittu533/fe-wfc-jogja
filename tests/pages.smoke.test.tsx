@@ -15,22 +15,29 @@ vi.mock("next/navigation", () => ({
 }));
 
 describe("app pages smoke", () => {
-  it("renders homepage hero and curated section", async () => {
+  it("renders homepage hero and discovery panel", async () => {
     render(await HomePage());
 
     expect(
       screen.getByRole("heading", {
-        name: /nugas jadi\s*sat-set\s*&\s*anti-drama/i,
+        name: /cari cafe wfc jogja\s*gak pake gambling/i,
+      }),
+    ).toBeInTheDocument();
+    expect(screen.getByText(/jogja wfc survival kit/i)).toBeInTheDocument();
+    expect(screen.getByText(/satu layar buat decide/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", {
+        name: /yang ini dulu aja,\s*biar gak overthinking/i,
       }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", {
-        name: /gas ke sini dulu,\s*biar gak bingung/i,
+        name: /hari ini mau\s*ngegas apa/i,
       }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", {
-        name: /lo lagi mau ngapain/i,
+        name: /list buat\s*wfc era/i,
       }),
     ).toBeInTheDocument();
   });

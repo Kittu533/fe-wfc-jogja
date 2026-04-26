@@ -14,13 +14,13 @@ export function Filters({
   areas: string[];
 }) {
   return (
-    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-5">
-      <label className="space-y-2 text-sm font-medium text-[color:var(--foreground)]">
-        <span>Area</span>
+    <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-5">
+      <label className="space-y-2 text-sm font-bold text-emerald-950">
+        <span className="text-xs uppercase tracking-[0.14em] text-emerald-900/45">Area</span>
         <select
           name="area"
           defaultValue={filters.area ?? ""}
-          className="h-12 w-full rounded-2xl border border-[color:var(--border)] bg-white px-4 text-sm outline-none focus:border-[color:var(--accent)]"
+          className="h-[3.25rem] w-full rounded-[1.25rem] border border-emerald-100 bg-white px-4 text-sm font-semibold text-emerald-950 outline-none transition focus:border-emerald-400 focus:ring-4 focus:ring-emerald-100"
         >
           <option value="">Semua area</option>
           {areas.map((area) => (
@@ -31,12 +31,12 @@ export function Filters({
         </select>
       </label>
 
-      <label className="space-y-2 text-sm font-medium text-[color:var(--foreground)]">
-        <span>Budget</span>
+      <label className="space-y-2 text-sm font-bold text-emerald-950">
+        <span className="text-xs uppercase tracking-[0.14em] text-emerald-900/45">Budget</span>
         <select
           name="priceLevel"
           defaultValue={filters.priceLevel ?? ""}
-          className="h-12 w-full rounded-2xl border border-[color:var(--border)] bg-white px-4 text-sm outline-none focus:border-[color:var(--accent)]"
+          className="h-[3.25rem] w-full rounded-[1.25rem] border border-emerald-100 bg-white px-4 text-sm font-semibold text-emerald-950 outline-none transition focus:border-emerald-400 focus:ring-4 focus:ring-emerald-100"
         >
           <option value="">Semua budget</option>
           {priceOptions.map((option) => (
@@ -47,20 +47,46 @@ export function Filters({
         </select>
       </label>
 
-      <label className="flex items-center gap-3 rounded-2xl border border-[color:var(--border)] bg-white px-4 py-3 text-sm font-medium text-[color:var(--foreground)]">
-        <input type="checkbox" name="hasSockets" value="true" defaultChecked={filters.hasSockets} />
-        Banyak colokan
-      </label>
+      <FilterCheck
+        name="hasSockets"
+        label="Banyak colokan"
+        defaultChecked={filters.hasSockets}
+      />
 
-      <label className="flex items-center gap-3 rounded-2xl border border-[color:var(--border)] bg-white px-4 py-3 text-sm font-medium text-[color:var(--foreground)]">
-        <input type="checkbox" name="hasMusholla" value="true" defaultChecked={filters.hasMusholla} />
-        Ada musholla
-      </label>
+      <FilterCheck
+        name="hasMusholla"
+        label="Ada musholla"
+        defaultChecked={filters.hasMusholla}
+      />
 
-      <label className="flex items-center gap-3 rounded-2xl border border-[color:var(--border)] bg-white px-4 py-3 text-sm font-medium text-[color:var(--foreground)]">
-        <input type="checkbox" name="hasParking" value="true" defaultChecked={filters.hasParking} />
-        Parkir lega
-      </label>
+      <FilterCheck
+        name="hasParking"
+        label="Parkir lega"
+        defaultChecked={filters.hasParking}
+      />
     </div>
+  );
+}
+
+function FilterCheck({
+  defaultChecked,
+  label,
+  name,
+}: {
+  defaultChecked?: boolean;
+  label: string;
+  name: string;
+}) {
+  return (
+    <label className="group flex h-[3.25rem] cursor-pointer items-center gap-3 rounded-[1.25rem] border border-emerald-100 bg-white px-4 text-sm font-black text-emerald-950 transition hover:border-emerald-300 hover:bg-emerald-50/70">
+      <input
+        type="checkbox"
+        name={name}
+        value="true"
+        defaultChecked={defaultChecked}
+        className="h-5 w-5 rounded-md border-emerald-200 accent-emerald-700"
+      />
+      {label}
+    </label>
   );
 }

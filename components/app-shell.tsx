@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 
+import { PageTransition } from "@/components/page-transition";
 import { SiteFooter } from "@/components/site-footer";
 import { SiteHeader } from "@/components/site-header";
 
@@ -35,7 +36,7 @@ export function AppShell({ children }: { children: ReactNode }) {
     <div className="relative min-h-screen">
       <GlobalParang />
       <SiteHeader />
-      <main className="relative z-10">{children}</main>
+      <PageTransition>{children}</PageTransition>
       <SiteFooter />
     </div>
   );

@@ -2,8 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { Coffee, Map, Sparkles, Wallet, Wifi, ArrowUpRight } from "lucide-react";
+
+import { ScrollVibe } from "@/components/home/scroll-vibe";
 
 const discoveryItems = [
   {
@@ -12,35 +14,35 @@ const discoveryItems = [
     icon: Coffee,
     img: "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=800&q=80",
     color: "from-emerald-600/90 to-emerald-900/95",
-    badge: "Most Popular",
+    badge: "Mode Serius",
   },
   {
-    title: "Cek Map Terdekat",
+    title: "Map Anti Muter",
     href: "/map",
     icon: Map,
     img: "https://images.unsplash.com/photo-1526778548025-fa2f459cd5c1?auto=format&fit=crop&w=800&q=80",
     color: "from-blue-600/90 to-blue-900/95",
-    desc: "Cari spot sat-set deket lokasi lo.",
+    desc: "Buka peta, pilih yang deket, gas tanpa drama parkir.",
   },
   {
-    title: "Wifi Anti-Lag",
+    title: "Wifi Gak Bikin Emosi",
     href: "/cafes?q=wifi kencang",
     icon: Wifi,
     img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
     color: "from-purple-600/90 to-purple-900/95",
-    desc: "Speed monster buat zoom meeting.",
+    desc: "Buat Zoom, upload tugas, sampai deploy tengah malam.",
   },
   {
-    title: "Dompet Aman Era",
+    title: "Dompet Tetap Waras",
     href: "/cafes?price=1",
     icon: Wallet,
     img: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80",
     color: "from-amber-500/90 to-amber-800/95",
-    desc: "Nugas jalan, saldo tetep tenang.",
+    desc: "Tetap produktif tanpa checkout menu yang bikin nyesel.",
   },
 ];
 
-const containerVariants = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -48,23 +50,23 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 30 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
+    transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] as const },
   },
 };
 
 export function DiscoveryBoardSection() {
   return (
-    <section className="relative overflow-hidden px-4 py-24 lg:py-32">
-      <div className="relative z-10 mx-auto max-w-7xl">
+    <section className="relative z-10 overflow-hidden px-4 py-24 lg:py-32">
+      <ScrollVibe className="relative z-10 mx-auto max-w-7xl">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: false, amount: 0.4 }}
           className="mb-20 text-center"
         >
           <div className="mb-6 flex items-center justify-center gap-3">
@@ -72,16 +74,16 @@ export function DiscoveryBoardSection() {
             <div className="flex items-center gap-2">
               <Sparkles className="h-5 w-5 text-emerald-500" />
               <span className="text-[10px] font-black uppercase tracking-[0.4em] text-emerald-600">
-                Mood Tracker
+                Pilih sesuai mood
               </span>
             </div>
             <div className="h-px w-12 bg-emerald-200" />
           </div>
           <h2 className="text-5xl font-black leading-tight tracking-tighter text-emerald-950 md:text-7xl">
-            Lo Lagi Mau <br />
+            Hari Ini Mau <br />
             <span className="relative inline-block">
               <span className="absolute inset-x-[-10px] bottom-2 top-6 -rotate-1 bg-amber-300/60 transition-transform group-hover:rotate-1" />
-              <span className="relative italic text-emerald-900">Ngapain?</span>
+              <span className="relative italic text-emerald-900">Ngegas Apa?</span>
             </span>
           </h2>
         </motion.div>
@@ -90,10 +92,10 @@ export function DiscoveryBoardSection() {
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
+          viewport={{ once: false, margin: "-100px", amount: 0.18 }}
           className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4"
         >
-          {discoveryItems.map((item, idx) => (
+          {discoveryItems.map((item) => (
             <motion.div key={item.title} variants={itemVariants}>
               <Link
                 href={item.href}
@@ -137,7 +139,7 @@ export function DiscoveryBoardSection() {
 
                     <div className="flex items-center justify-between">
                       <div className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-widest text-white/60 transition-colors group-hover:text-white">
-                        Gaskeun <span>→</span>
+                        Langsung cek <span>→</span>
                       </div>
                       <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 text-white opacity-0 transition-all duration-500 group-hover:opacity-100">
                         <ArrowUpRight className="h-5 w-5" />
@@ -149,8 +151,7 @@ export function DiscoveryBoardSection() {
             </motion.div>
           ))}
         </motion.div>
-      </div>
+      </ScrollVibe>
     </section>
   );
 }
-

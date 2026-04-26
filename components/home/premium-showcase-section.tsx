@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import { ArrowRight, Star, Sparkles, ExternalLink, ShieldCheck, Zap, Wifi } from "lucide-react";
 
+import { ScrollVibe } from "@/components/home/scroll-vibe";
 import type { CuratedList } from "@/lib/types";
 
 const premiumImages = [
@@ -21,12 +22,12 @@ const containerVariants = {
   },
 };
 
-const itemVariants = {
+const itemVariants: Variants = {
   hidden: { opacity: 0, y: 15 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+    transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] as const },
   },
 };
 
@@ -36,8 +37,8 @@ export function PremiumShowcaseSection({
   curatedLists: CuratedList[];
 }) {
   return (
-    <section className="relative px-4 py-20 lg:py-24">
-      <div className="mx-auto max-w-7xl">
+    <section className="relative z-10 px-4 py-20 lg:py-24">
+      <ScrollVibe className="mx-auto max-w-7xl">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-start">
           
           {/* Left Side: Header & Info (4 cols) */}
@@ -45,7 +46,7 @@ export function PremiumShowcaseSection({
             <motion.div
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.35 }}
               className="space-y-8"
             >
               <div>
@@ -54,12 +55,12 @@ export function PremiumShowcaseSection({
                     <ShieldCheck className="h-4 w-4" />
                   </div>
                   <span className="text-[10px] font-black uppercase tracking-[0.3em] text-emerald-600">
-                    Elite Standard
+                    Kurasi anti zonk
                   </span>
                 </div>
                 
                 <h2 className="mb-6 text-4xl font-black leading-[1.1] tracking-tighter text-emerald-950 md:text-5xl">
-                  The Jogja <br />
+                  List Buat <br />
                   <span className="relative inline-block">
                     <svg className="absolute inset-x-0 -bottom-1 -top-1 h-full w-full" viewBox="0 0 100 20" preserveAspectRatio="none">
                       <motion.path
@@ -74,22 +75,22 @@ export function PremiumShowcaseSection({
                         transition={{ duration: 1, ease: "easeInOut", delay: 0.5 }}
                       />
                     </svg>
-                    <span className="relative italic text-emerald-600">Shortlist.</span>
+                    <span className="relative italic text-emerald-600">WFC Era.</span>
                   </span>
                 </h2>
                 
                 <p className="text-sm font-medium leading-relaxed text-emerald-900/50">
-                  Hanya spot produktif terbaik yang lolos kurasi "Anti-Zonk" kami. 
-                  WFC spot, Coworking, hingga Hidden Gem—semua ada di sini.
+                  Buat yang males scroll Maps sejam tapi tetap pengen tempat
+                  yang nyaman, stabil, dan gak salah vibes.
                 </p>
               </div>
 
               <div className="space-y-4 rounded-3xl border border-emerald-100 bg-emerald-50/30 p-6 backdrop-blur-sm">
-                <p className="text-[10px] font-black uppercase tracking-widest text-emerald-900/40">Verified Standards:</p>
+                <p className="text-[10px] font-black uppercase tracking-widest text-emerald-900/40">Standar wajib sebelum gas:</p>
                 {[
-                  { icon: Wifi, label: "Reliable High-Speed", color: "text-blue-600" },
-                  { icon: Zap, label: "Power-outlets Everywhere", color: "text-amber-600" },
-                  { icon: Sparkles, label: "Elite Ambiance", color: "text-emerald-600" }
+                  { icon: Wifi, label: "Wifi gak prank", color: "text-blue-600" },
+                  { icon: Zap, label: "Colokan gak rebutan", color: "text-amber-600" },
+                  { icon: Sparkles, label: "Vibe fokus tapi tetep chill", color: "text-emerald-600" }
                 ].map((item, idx) => (
                   <div key={idx} className="flex items-center gap-3">
                     <item.icon className={`h-4 w-4 ${item.color}`} />
@@ -102,7 +103,7 @@ export function PremiumShowcaseSection({
                 href="/lists"
                 className="group inline-flex items-center gap-4 text-xs font-black uppercase tracking-widest text-emerald-950 transition-all hover:text-emerald-600"
               >
-                View All Collections
+                Lihat semua kurasi
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-2" />
               </Link>
             </motion.div>
@@ -114,7 +115,7 @@ export function PremiumShowcaseSection({
               variants={containerVariants}
               initial="hidden"
               whileInView="visible"
-              viewport={{ once: true, margin: "-50px" }}
+              viewport={{ once: false, margin: "-50px", amount: 0.2 }}
               className="grid grid-cols-1 gap-6 md:grid-cols-2"
             >
               {/* Main Feature - Tall (2 cols span) */}
@@ -135,13 +136,13 @@ export function PremiumShowcaseSection({
                     <div className="absolute top-8 left-8">
                       <span className="flex items-center gap-2 rounded-full bg-emerald-500/90 px-4 py-2 text-[9px] font-black uppercase tracking-widest text-white shadow-lg backdrop-blur-md">
                         <Star className="h-3 w-3 fill-current" />
-                        Editor's Choice
+                        Paling aman buat mulai
                       </span>
                     </div>
 
                     <div className="absolute bottom-8 left-8 right-8 lg:bottom-10 lg:left-10 lg:right-10">
                       <div className="mb-4 flex flex-wrap gap-2">
-                        {["Giga-Wifi", "Pro Vibe"].map(tag => (
+                        {["Wifi aman", "Vibe fokus"].map(tag => (
                           <span key={tag} className="rounded-lg bg-white/10 px-2 py-0.5 text-[8px] font-black uppercase tracking-widest text-white backdrop-blur-sm">
                             {tag}
                           </span>
@@ -191,8 +192,7 @@ export function PremiumShowcaseSection({
           </div>
 
         </div>
-      </div>
+      </ScrollVibe>
     </section>
   );
 }
-

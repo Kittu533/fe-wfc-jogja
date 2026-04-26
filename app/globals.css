@@ -33,6 +33,7 @@ html,
 body {
   height: 100%;
   scroll-behavior: smooth;
+  scroll-padding-top: 96px;
 }
 
 body {
@@ -69,4 +70,22 @@ a {
 
 .hero-marquee {
   white-space: nowrap;
+  animation: hero-marquee 24s linear infinite;
+  will-change: transform;
+}
+
+@keyframes hero-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-marquee {
+    animation: none;
+  }
 }

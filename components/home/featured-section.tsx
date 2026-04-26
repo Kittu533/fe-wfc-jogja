@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 
 import { CafeCard } from "@/components/cafe-card";
+import { ScrollVibe } from "@/components/home/scroll-vibe";
 import type { CafeListItem } from "@/lib/types";
 
 export function FeaturedSection({ featuredCafes }: { featuredCafes: CafeListItem[] }) {
@@ -13,8 +14,8 @@ export function FeaturedSection({ featuredCafes }: { featuredCafes: CafeListItem
   const secondaryCafes = featuredCafes.slice(1, 3);
 
   return (
-    <section className="relative overflow-hidden px-4 py-16 lg:py-20">
-      <div className="mx-auto max-w-7xl">
+    <section className="relative z-10 overflow-hidden px-4 py-16 lg:py-20">
+      <ScrollVibe className="mx-auto max-w-7xl">
         <div className="mb-10 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
           <div>
             <div className="mb-4 flex items-center gap-2">
@@ -22,12 +23,12 @@ export function FeaturedSection({ featuredCafes }: { featuredCafes: CafeListItem
                 <Sparkles className="h-3.5 w-3.5" />
               </div>
               <span className="text-[10px] font-black uppercase tracking-[0.2em] text-emerald-600">
-                Shortlist Pilihan
+                Spot yang lagi worth it
               </span>
             </div>
             <h2 className="text-4xl font-black leading-[1.1] tracking-tight text-emerald-950 md:text-5xl">
-              Gas ke Sini Dulu, <br />
-              <span className="text-emerald-600">Biar Gak Bingung.</span>
+              Yang Ini Dulu Aja, <br />
+              <span className="text-emerald-600">Biar Gak Overthinking.</span>
             </h2>
           </div>
 
@@ -35,7 +36,7 @@ export function FeaturedSection({ featuredCafes }: { featuredCafes: CafeListItem
             href="/cafes"
             className="group inline-flex items-center gap-3 rounded-2xl border border-emerald-100 bg-white px-6 py-3.5 text-[10px] font-black uppercase tracking-widest text-emerald-700 shadow-sm transition-all hover:border-emerald-500 hover:bg-emerald-50"
           >
-            Lihat Semua Spot
+            Buka Semua Spot
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
           </Link>
         </div>
@@ -45,7 +46,7 @@ export function FeaturedSection({ featuredCafes }: { featuredCafes: CafeListItem
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.35 }}
               className="lg:col-span-6"
             >
               <Link
@@ -62,7 +63,7 @@ export function FeaturedSection({ featuredCafes }: { featuredCafes: CafeListItem
 
                 <div className="absolute left-8 top-8">
                   <span className="rounded-full border border-white/20 bg-white/20 px-4 py-1.5 text-[10px] font-black uppercase tracking-widest text-white shadow-xl backdrop-blur-md">
-                    Editor&apos;s Pick
+                    Lagi Aman Buat Ngegas
                   </span>
                 </div>
 
@@ -74,7 +75,7 @@ export function FeaturedSection({ featuredCafes }: { featuredCafes: CafeListItem
                     {spotlightCafe.name}
                   </h3>
                   <div className="inline-flex items-center gap-3 rounded-xl border border-white/20 bg-white/10 px-6 py-3 text-[10px] font-black uppercase tracking-widest text-white backdrop-blur-md transition-all group-hover:border-transparent group-hover:bg-emerald-600">
-                    Cek Detail Spot <span>→</span>
+                    Spill Detail Spot <span>→</span>
                   </div>
                 </div>
               </Link>
@@ -86,7 +87,7 @@ export function FeaturedSection({ featuredCafes }: { featuredCafes: CafeListItem
               key={cafe.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              viewport={{ once: false, amount: 0.35 }}
               transition={{ delay: 0.1 * (idx + 1) }}
               className="lg:col-span-3"
             >
@@ -94,9 +95,7 @@ export function FeaturedSection({ featuredCafes }: { featuredCafes: CafeListItem
             </motion.div>
           ))}
         </div>
-      </div>
+      </ScrollVibe>
     </section>
   );
 }
-
-
