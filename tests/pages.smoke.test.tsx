@@ -46,50 +46,49 @@ describe("app pages smoke", () => {
     render(
       await CafesPage({
         searchParams: Promise.resolve({
-          q: "kopi",
-          area: "Seturan",
-          priceLevel: "menengah",
+          q: "nilu",
+          area: "Kaliurang",
         }),
       }),
     );
 
-    expect(screen.getByText(/menampilkan/i)).toHaveTextContent("Menampilkan 1 cafe di Seturan.");
-    expect(screen.getByRole("heading", { name: "Space Roastery Seturan" })).toBeInTheDocument();
+    expect(screen.getByText(/spot ketemu/i).closest("p")).toHaveTextContent("1 Spot ketemu");
+    expect(screen.getByRole("heading", { name: "Nilu Coffee" })).toBeInTheDocument();
   });
 
   it("renders cafe detail page for valid slug", async () => {
     render(
       await CafeDetailPage({
         params: Promise.resolve({
-          slug: "space-roastery-seturan",
+          slug: "nilu-coffee",
         }),
       }),
     );
 
     expect(
       screen.getByRole("heading", {
-        name: "Space Roastery Seturan",
+        name: "Nilu Coffee",
       }),
     ).toBeInTheDocument();
-    expect(screen.getByText("Amenities utama")).toBeInTheDocument();
-    expect(screen.getByText("Nadia")).toBeInTheDocument();
+    expect(screen.getByText(/candidate from openstreetmap/i)).toBeInTheDocument();
+    expect(screen.getByText(/Review WFC awal/i)).toBeInTheDocument();
   });
 
   it("renders curated list detail only with cafes in that list", async () => {
     render(
       await CuratedListDetailPage({
         params: Promise.resolve({
-          slug: "cafe-buat-skripsi-seharian",
+          slug: "coworking-dan-workspace-jogja",
         }),
       }),
     );
 
     expect(
       screen.getByRole("heading", {
-        name: "Cafe Buat Skripsi Seharian",
+        name: "Coworking dan Workspace Jogja",
       }),
     ).toBeInTheDocument();
-    expect(screen.getByRole("heading", { name: "Space Roastery Seturan" })).toBeInTheDocument();
-    expect(screen.queryByRole("heading", { name: "Teras Kotabaru" })).not.toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "Crônica Creative Workspace" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "Altilis Coffee" })).not.toBeInTheDocument();
   });
 });

@@ -2,11 +2,12 @@
 
 import Image from "next/image";
 import { Coffee, MapPin, Sparkles, Star } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 type StatPillProps = {
   label: string;
   value: string;
-  icon: any;
+  icon: LucideIcon;
   description: string;
 };
 

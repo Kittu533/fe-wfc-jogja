@@ -39,7 +39,7 @@ export function ListsHero() {
           className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-emerald-50 backdrop-blur-md"
         >
           <Bookmark className="h-4 w-4 text-emerald-300" />
-          Editor's Picks
+          Editor&apos;s Picks
         </motion.div>
         <motion.h1 
           initial={{ opacity: 0, y: 20 }}

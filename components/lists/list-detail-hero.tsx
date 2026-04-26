@@ -78,7 +78,7 @@ export function ListDetailHero({ list }: { list: CuratedList }) {
               </div>
             </div>
             <p className="text-sm font-medium leading-relaxed text-emerald-50/70 italic">
-              "{list.summary}"
+              &ldquo;{list.summary}&rdquo;
             </p>
             <div className="mt-8 flex items-center gap-2">
               <div className="flex -space-x-3">

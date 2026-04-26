@@ -11,6 +11,7 @@ const navItems = [
   { href: "/cafes", label: "Cari Cafe" },
   { href: "/map", label: "Peta" },
   { href: "/lists", label: "Kurasi" },
+  { href: "/admin/places", label: "Admin" },
 ];
 
 export function SiteHeader() {

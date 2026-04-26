@@ -15,7 +15,6 @@ import {
   Wind, 
   Users,
   Check,
-  Star,
   Coffee,
   Utensils
 } from "lucide-react";
@@ -26,6 +25,8 @@ import { getCafeBySlug } from "@/lib/services/cafes";
 import { getPriceLabel } from "@/lib/utils/cafes";
 import { RatingStars } from "@/components/rating-stars";
 import { getAverageRating } from "@/lib/utils/cafes";
+
+export const dynamic = "force-dynamic";
 
 type CafeDetailPageProps = {
   params: Promise<{ slug: string }>;

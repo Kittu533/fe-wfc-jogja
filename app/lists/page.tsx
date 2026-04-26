@@ -5,6 +5,8 @@ import { ListsHero } from "@/components/lists/lists-hero";
 import { ListCard } from "@/components/lists/list-card";
 import { getCuratedLists } from "@/lib/services/cafes";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Kurasi Cafe",
   description: "Daftar list tematik untuk membantu pengguna memilih cafe lebih cepat.",

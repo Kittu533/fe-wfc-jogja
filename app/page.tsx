@@ -5,6 +5,8 @@ import { buildHomePageJsonLd } from "@/lib/seo";
 import { getCafes, getCuratedLists } from "@/lib/services/cafes";
 import { HOME_OG_IMAGE, SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Cari Cafe Jogja Buat Kerja, Nugas, dan Stay Lama",
   description: SITE_DESCRIPTION,

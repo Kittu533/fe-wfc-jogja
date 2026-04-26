@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="Coffee shop fallback cover">
+  <rect width="1200" height="800" fill="#fffef8"/>
+  <rect x="66" y="64" width="1068" height="672" rx="64" fill="#184d36"/>
+  <path d="M66 540h1068v196H66z" fill="#2f8f5b"/>
+  <circle cx="220" cy="188" r="72" fill="#dcead8"/>
+  <circle cx="982" cy="602" r="96" fill="#dcead8" opacity=".6"/>
+  <path d="M370 250h280c0 118-66 194-140 194s-140-76-140-194z" fill="#f8faf4"/>
+  <path d="M650 284h60c46 0 78 30 78 74s-32 74-78 74h-58" fill="none" stroke="#f8faf4" stroke-width="28" stroke-linecap="round"/>
+  <path d="M424 186c-24-42 28-56 0-104M510 186c-24-42 28-56 0-104M596 186c-24-42 28-56 0-104" fill="none" stroke="#dcead8" stroke-width="20" stroke-linecap="round"/>
+  <text x="120" y="620" fill="#f8faf4" font-family="Arial, sans-serif" font-size="92" font-weight="900" letter-spacing="-4">KOPI + FOKUS</text>
+  <text x="124" y="674" fill="#dcead8" font-family="Arial, sans-serif" font-size="34" font-weight="700">Fallback cover for coffee shops</text>
+</svg>

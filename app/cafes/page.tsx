@@ -10,6 +10,7 @@ import {
 import { CafeCard } from "@/components/cafe-card";
 import { EmptyState } from "@/components/empty-state";
 import { Filters } from "@/components/filters";
+import { Pagination } from "@/components/pagination";
 import { SearchBar } from "@/components/search-bar";
 import { CafesHero } from "@/components/cafes/cafes-hero";
 import { ResultsBar } from "@/components/cafes/results-bar";
@@ -17,6 +18,8 @@ import { getCafes } from "@/lib/services/cafes";
 import type { CafeFilters } from "@/lib/types";
 import { getPriceLabel } from "@/lib/utils/cafes";
 import { parseCafeFilters } from "@/lib/utils/search-params";
+
+export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Cari Cafe",
@@ -99,11 +102,19 @@ export default async function CafesPage({ searchParams }: CafesPageProps) {
             actionLabel="Reset filter"
           />
         ) : (
-          <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {result.items.map((cafe) => (
-              <CafeCard key={cafe.id} cafe={cafe} />
-            ))}
-          </section>
+          <div className="space-y-8">
+            <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {result.items.map((cafe) => (
+                <CafeCard key={cafe.id} cafe={cafe} />
+              ))}
+            </section>
+            <Pagination
+              basePath="/cafes"
+              page={result.page}
+              totalPages={result.totalPages}
+              searchParams={resolvedSearchParams}
+            />
+          </div>
         )}
       </div>
     </div>

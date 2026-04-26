@@ -4,10 +4,15 @@ import { notFound } from "next/navigation";
 import { CafeCard } from "@/components/cafe-card";
 import { EmptyState } from "@/components/empty-state";
 import { ListDetailHero } from "@/components/lists/list-detail-hero";
+import { Pagination } from "@/components/pagination";
 import { getCuratedListBySlug } from "@/lib/services/cafes";
+import { parsePaginationParams } from "@/lib/utils/search-params";
+
+export const dynamic = "force-dynamic";
 
 type CuratedListDetailPageProps = {
   params: Promise<{ slug: string }>;
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export async function generateMetadata({
@@ -30,9 +35,12 @@ export async function generateMetadata({
 
 export default async function CuratedListDetailPage({
   params,
+  searchParams,
 }: CuratedListDetailPageProps) {
   const { slug } = await params;
-  const list = await getCuratedListBySlug(slug);
+  const resolvedSearchParams = (await searchParams) ?? {};
+  const pagination = parsePaginationParams(resolvedSearchParams);
+  const list = await getCuratedListBySlug(slug, pagination);
 
   if (!list) {
     notFound();
@@ -53,7 +61,7 @@ export default async function CuratedListDetailPage({
         <div className="space-y-8">
           <div className="flex items-center gap-4">
             <h2 className="text-2xl font-black text-emerald-950">
-              Explore {list.cafes.length} spots
+              Explore {list.totalCafes} spots
             </h2>
             <div className="h-px flex-1 bg-emerald-100" />
           </div>
@@ -63,6 +71,12 @@ export default async function CuratedListDetailPage({
               <CafeCard key={cafe.id} cafe={cafe} />
             ))}
           </section>
+          <Pagination
+            basePath={`/lists/${slug}`}
+            page={list.page}
+            totalPages={list.totalPages}
+            searchParams={resolvedSearchParams}
+          />
         </div>
       )}
     </div>

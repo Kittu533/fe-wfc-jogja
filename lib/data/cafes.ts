@@ -1,794 +1,373 @@
-import type { CafeDetail, CuratedList } from "@/lib/types";
+import selectedCandidates from "@/data/wfc-candidates-jogja.selected.json";
+import type {
+  CafeDetail,
+  CafeMenuItem,
+  CafeReview,
+  CuratedList,
+  PriceLevel,
+  RatingBreakdown,
+} from "@/lib/types";
 
-export const mockCafes: CafeDetail[] = [
-  {
-    id: "cafe-01",
-    slug: "space-roastery-seturan",
-    name: "Space Roastery Seturan",
-    tagline: "Espresso bar terang dengan kopi bersih, meja kerja panjang, dan wifi kencang.",
-    area: "Seturan",
-    address: "Jl. Seturan Raya No. 18, Caturtunggal, Sleman",
-    priceLevel: "menengah",
-    coordinates: { latitude: -7.7743, longitude: 110.4098 },
-    coverImage:
-      "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80",
-    featureHighlights: ["Wifi stabil", "Banyak colokan", "Cold brew bersih"],
-    bestFor: ["Nugas fokus", "Meeting santai", "Kerja remote"],
-    amenities: {
-      hasSockets: true,
-      hasMusholla: false,
-      hasParking: true,
-      smokingArea: true,
-      indoorOutdoor: true,
-    },
-    description:
-      "Cafe mock untuk flow frontend dengan atmosfer work-friendly, pencahayaan natural, dan meja komunal yang nyaman dipakai berjam-jam.",
-    openingHours: "08.00 - 00.00",
-    contactPhone: "0812-0000-0011",
-    instagram: "@spaceroastery.seturan",
-    website: "https://example.com/space-roastery",
-    mapsUrl: "https://maps.google.com/?q=-7.7743,110.4098",
-    galleryImages: [
-      "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=80",
-      "https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=1200&q=80",
-    ],
-    ratingBreakdown: {
-      food: 4.3,
-      drink: 4.7,
-      wifi: 4.8,
-      ambience: 4.5,
-      workFriendly: 4.9,
-      value: 4.2,
-    },
-    recommendedMenu: [
-      { name: "Kopi Susu Space", priceLabel: "Rp28k", note: "manis seimbang" },
-      { name: "Chicken Nanban Rice", priceLabel: "Rp42k", note: "porsi aman buat lunch" },
-      { name: "Cold Brew Citrus", priceLabel: "Rp30k", note: "segarnya ringan" },
-    ],
-    reviews: [
-      {
-        id: "review-01",
-        cafeId: "cafe-01",
-        author: "Nadia",
-        role: "Mahasiswa",
-        comment: "Enak buat nugas lama, colokan gampang dicari dan wifi stabil.",
-        visitDate: "2026-04-10",
-        createdAt: "2026-04-11T09:00:00+07:00",
-        ratings: {
-          food: 4,
-          drink: 5,
-          wifi: 5,
-          ambience: 4,
-          workFriendly: 5,
-          value: 4,
-        },
-      },
-      {
-        id: "review-02",
-        cafeId: "cafe-01",
-        author: "Rafi",
-        role: "Remote Worker",
-        comment: "Musik tidak terlalu keras dan meja komunalnya proper untuk kerja tim kecil.",
-        visitDate: "2026-04-15",
-        createdAt: "2026-04-16T20:15:00+07:00",
-        ratings: {
-          food: 4,
-          drink: 5,
-          wifi: 5,
-          ambience: 5,
-          workFriendly: 5,
-          value: 4,
-        },
-      },
-    ],
-  },
-  {
-    id: "cafe-02",
-    slug: "kopi-kampus-kaliurang",
-    name: "Kopi Kampus Kaliurang",
-    tagline: "Murah, ramai mahasiswa, dan cocok buat nugas malam.",
-    area: "Kaliurang",
-    address: "Jl. Kaliurang Km 7, Sleman",
-    priceLevel: "murah",
-    coordinates: { latitude: -7.7605, longitude: 110.3801 },
-    coverImage:
-      "https://images.unsplash.com/photo-1497935586351-b67a49e012bf?auto=format&fit=crop&w=1200&q=80",
-    featureHighlights: ["Harga aman", "Musholla dekat", "Snack banyak"],
-    bestFor: ["Skripsi marathon", "Nongkrong hemat"],
-    amenities: {
-      hasSockets: true,
-      hasMusholla: true,
-      hasParking: true,
-      smokingArea: true,
-      indoorOutdoor: true,
-    },
-    description: "Spot mock dengan traffic mahasiswa tinggi dan menu budget-friendly.",
-    openingHours: "10.00 - 01.00",
-    contactPhone: "0812-0000-0012",
-    instagram: "@kopikampus.klg",
-    mapsUrl: "https://maps.google.com/?q=-7.7605,110.3801",
-    galleryImages: [
-      "https://images.unsplash.com/photo-1453614512568-c4024d13c247?auto=format&fit=crop&w=1200&q=80",
-    ],
-    ratingBreakdown: {
-      food: 4.1,
-      drink: 4.2,
-      wifi: 4.3,
-      ambience: 4.0,
-      workFriendly: 4.5,
-      value: 4.8,
-    },
-    recommendedMenu: [
-      { name: "Americano Es", priceLabel: "Rp18k", note: "pahit clean" },
-      { name: "Indomie Carbonara", priceLabel: "Rp22k", note: "comfort food" },
-    ],
-    reviews: [
-      {
-        id: "review-03",
-        cafeId: "cafe-02",
-        author: "Dian",
-        role: "Mahasiswa",
-        comment: "Kalau cari yang murah dan aman buat lembur, ini masuk.",
-        visitDate: "2026-04-08",
-        createdAt: "2026-04-09T08:30:00+07:00",
-        ratings: {
-          food: 4,
-          drink: 4,
-          wifi: 4,
-          ambience: 4,
-          workFriendly: 5,
-          value: 5,
-        },
-      },
-    ],
-  },
-  {
-    id: "cafe-03",
-    slug: "teras-kotabaru",
-    name: "Teras Kotabaru",
-    tagline: "Brunch place dengan ambience tenang dekat pusat kota.",
-    area: "Kotabaru",
-    address: "Jl. Suroto No. 12, Kotabaru, Yogyakarta",
-    priceLevel: "premium",
-    coordinates: { latitude: -7.7829, longitude: 110.3741 },
-    coverImage:
-      "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80",
-    featureHighlights: ["Makanan enak", "Interior rapi", "Pas buat meeting"],
-    bestFor: ["Meeting", "Brunch santai"],
-    amenities: {
-      hasSockets: true,
-      hasMusholla: false,
-      hasParking: true,
-      smokingArea: false,
-      indoorOutdoor: true,
-    },
-    description: "Cafe mock dengan fokus brunch dan ruang indoor yang lebih tenang.",
-    openingHours: "07.00 - 22.00",
-    contactPhone: "0812-0000-0013",
-    instagram: "@teras.kotabaru",
-    mapsUrl: "https://maps.google.com/?q=-7.7829,110.3741",
-    galleryImages: [
-      "https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1200&q=80",
-    ],
-    ratingBreakdown: {
-      food: 4.8,
-      drink: 4.4,
-      wifi: 4.1,
-      ambience: 4.7,
-      workFriendly: 4.0,
-      value: 4.0,
-    },
-    recommendedMenu: [
-      { name: "Big Breakfast", priceLabel: "Rp58k", note: "plate komplet" },
-      { name: "Flat White", priceLabel: "Rp32k", note: "tekstur susu rapi" },
-    ],
-    reviews: [
-      {
-        id: "review-04",
-        cafeId: "cafe-03",
-        author: "Salsa",
-        role: "Traveler",
-        comment: "Makanannya menang, tempatnya cocok buat ngobrol santai.",
-        visitDate: "2026-04-03",
-        createdAt: "2026-04-04T14:00:00+07:00",
-        ratings: {
-          food: 5,
-          drink: 4,
-          wifi: 4,
-          ambience: 5,
-          workFriendly: 4,
-          value: 4,
-        },
-      },
-    ],
-  },
-  {
-    id: "cafe-04",
-    slug: "senja-works-gejayan",
-    name: "Senja Works Gejayan",
-    tagline: "Semi-industrial workspace cafe dengan banyak colokan.",
-    area: "Gejayan",
-    address: "Jl. Affandi No. 51, Sleman",
-    priceLevel: "menengah",
-    coordinates: { latitude: -7.7759, longitude: 110.3922 },
-    coverImage:
-      "https://images.unsplash.com/photo-1524758631624-e2822e304c36?auto=format&fit=crop&w=1200&q=80",
-    featureHighlights: ["Ruang kerja lega", "Non-smoking utama", "Parkir motor luas"],
-    bestFor: ["Kerja remote", "Diskusi tim"],
-    amenities: {
-      hasSockets: true,
-      hasMusholla: true,
-      hasParking: true,
-      smokingArea: true,
-      indoorOutdoor: true,
-    },
-    description: "Cafe mock yang dibayangkan sebagai persilangan coworking dan coffee shop.",
-    openingHours: "09.00 - 23.00",
-    contactPhone: "0812-0000-0014",
-    instagram: "@senjaworks.gejayan",
-    mapsUrl: "https://maps.google.com/?q=-7.7759,110.3922",
-    galleryImages: [
-      "https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1200&q=80",
-    ],
-    ratingBreakdown: {
-      food: 4.2,
-      drink: 4.5,
-      wifi: 4.7,
-      ambience: 4.4,
-      workFriendly: 4.8,
-      value: 4.3,
-    },
-    recommendedMenu: [
-      { name: "Butterscotch Latte", priceLabel: "Rp31k", note: "signature manis" },
-      { name: "Chicken Sandwich", priceLabel: "Rp39k", note: "cepat untuk lunch" },
-    ],
-    reviews: [
-      {
-        id: "review-05",
-        cafeId: "cafe-04",
-        author: "Fikri",
-        role: "UI Designer",
-        comment: "Kalau butuh fokus tapi tetap pengen vibes cafe, tempat ini aman.",
-        visitDate: "2026-04-19",
-        createdAt: "2026-04-19T18:30:00+07:00",
-        ratings: {
-          food: 4,
-          drink: 5,
-          wifi: 5,
-          ambience: 4,
-          workFriendly: 5,
-          value: 4,
-        },
-      },
-    ],
-  },
-  {
-    id: "cafe-05",
-    slug: "prawiro-brew-house",
-    name: "Prawiro Brew House",
-    tagline: "Outdoor-friendly cafe untuk nongkrong sore dan makan berat.",
-    area: "Prawirotaman",
-    address: "Jl. Prawirotaman II No. 8, Yogyakarta",
-    priceLevel: "menengah",
-    coordinates: { latitude: -7.8168, longitude: 110.3672 },
-    coverImage:
-      "https://images.unsplash.com/photo-1463797221720-6b07e6426c24?auto=format&fit=crop&w=1200&q=80",
-    featureHighlights: ["Smoking area nyaman", "Porsi makan besar", "Live music akhir pekan"],
-    bestFor: ["Nongkrong santai", "Makan malam"],
-    amenities: {
-      hasSockets: false,
-      hasMusholla: false,
-      hasParking: true,
-      smokingArea: true,
-      indoorOutdoor: true,
-    },
-    description: "Cafe mock bertema hangout dengan area outdoor dominan.",
-    openingHours: "15.00 - 01.00",
-    contactPhone: "0812-0000-0015",
-    instagram: "@prawirobrewhouse",
-    mapsUrl: "https://maps.google.com/?q=-7.8168,110.3672",
-    galleryImages: [
-      "https://images.unsplash.com/photo-1514933651103-005eec06c04b?auto=format&fit=crop&w=1200&q=80",
-    ],
-    ratingBreakdown: {
-      food: 4.6,
-      drink: 4.1,
-      wifi: 3.8,
-      ambience: 4.5,
-      workFriendly: 3.6,
-      value: 4.2,
-    },
-    recommendedMenu: [
-      { name: "Beef Sambal Matah Bowl", priceLabel: "Rp46k", note: "gurih pedas" },
-      { name: "Lychee Coffee Tonic", priceLabel: "Rp33k", note: "refreshing" },
-    ],
-    reviews: [
-      {
-        id: "review-06",
-        cafeId: "cafe-05",
-        author: "Gina",
-        role: "Local Explorer",
-        comment: "Bukan tempat paling fokus buat kerja, tapi enak buat nongkrong malam.",
-        visitDate: "2026-04-12",
-        createdAt: "2026-04-13T19:45:00+07:00",
-        ratings: {
-          food: 5,
-          drink: 4,
-          wifi: 3,
-          ambience: 5,
-          workFriendly: 3,
-          value: 4,
-        },
-      },
-    ],
-  },
-  {
-    id: "cafe-06",
-    slug: "malio-morning-club",
-    name: "Malio Morning Club",
-    tagline: "Cafe kecil dekat Malioboro buat sarapan dan recharge singkat.",
-    area: "Malioboro",
-    address: "Jl. Mataram No. 21, Yogyakarta",
-    priceLevel: "menengah",
-    coordinates: { latitude: -7.7929, longitude: 110.3654 },
-    coverImage:
-      "https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1200&q=80",
-    featureHighlights: ["Dekat stasiun", "Breakfast kuat", "Cepat untuk singgah"],
-    bestFor: ["Transit kerja", "Breakfast"],
-    amenities: {
-      hasSockets: true,
-      hasMusholla: false,
-      hasParking: false,
-      smokingArea: false,
-      indoorOutdoor: false,
-    },
-    description: "Cafe mock kecil yang cocok untuk transit singkat sebelum aktivitas kota.",
-    openingHours: "06.30 - 18.00",
-    contactPhone: "0812-0000-0016",
-    instagram: "@maliomorningclub",
-    mapsUrl: "https://maps.google.com/?q=-7.7929,110.3654",
-    galleryImages: [
-      "https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=1200&q=80",
-    ],
-    ratingBreakdown: {
-      food: 4.5,
-      drink: 4.2,
-      wifi: 4.0,
-      ambience: 4.1,
-      workFriendly: 3.9,
-      value: 4.1,
-    },
-    recommendedMenu: [
-      { name: "Croissant Egg Mayo", priceLabel: "Rp34k", note: "cepat dan padat" },
-      { name: "Long Black", priceLabel: "Rp24k", note: "langsung bangun" },
-    ],
-    reviews: [
-      {
-        id: "review-07",
-        cafeId: "cafe-06",
-        author: "Ari",
-        role: "Traveler",
-        comment: "Lokasi strategis, enak buat recharge sambil tunggu agenda berikutnya.",
-        visitDate: "2026-04-14",
-        createdAt: "2026-04-14T11:30:00+07:00",
-        ratings: {
-          food: 5,
-          drink: 4,
-          wifi: 4,
-          ambience: 4,
-          workFriendly: 4,
-          value: 4,
-        },
-      },
-    ],
-  },
-  {
-    id: "cafe-07",
-    slug: "selatan-courtyard",
-    name: "Selatan Courtyard",
-    tagline: "Hidden gem dengan halaman luas dan zona non-smoking nyaman.",
-    area: "Selatan",
-    address: "Jl. Parangtritis Km 5, Bantul",
-    priceLevel: "premium",
-    coordinates: { latitude: -7.8448, longitude: 110.3586 },
-    coverImage:
-      "https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=1200&q=80",
-    featureHighlights: ["Halaman adem", "Desain rapi", "Parkir mobil aman"],
-    bestFor: ["Meeting santai", "Quality time"],
-    amenities: {
-      hasSockets: true,
-      hasMusholla: true,
-      hasParking: true,
-      smokingArea: true,
-      indoorOutdoor: true,
-    },
-    description: "Cafe mock bergaya courtyard dengan fokus ke ambience dan kenyamanan.",
-    openingHours: "09.00 - 22.00",
-    contactPhone: "0812-0000-0017",
-    instagram: "@selatancourtyard",
-    mapsUrl: "https://maps.google.com/?q=-7.8448,110.3586",
-    galleryImages: [
-      "https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&w=1200&q=80",
-    ],
-    ratingBreakdown: {
-      food: 4.4,
-      drink: 4.3,
-      wifi: 4.1,
-      ambience: 4.8,
-      workFriendly: 4.2,
-      value: 4.0,
-    },
-    recommendedMenu: [
-      { name: "Truffle Fries", priceLabel: "Rp36k", note: "shareable" },
-      { name: "Peach Tea", priceLabel: "Rp27k", note: "ringan" },
-    ],
-    reviews: [
-      {
-        id: "review-08",
-        cafeId: "cafe-07",
-        author: "Mira",
-        role: "Founder",
-        comment: "Kalau butuh tempat ketemu klien yang santai tapi tetap proper, bagus.",
-        visitDate: "2026-04-05",
-        createdAt: "2026-04-06T16:20:00+07:00",
-        ratings: {
-          food: 4,
-          drink: 4,
-          wifi: 4,
-          ambience: 5,
-          workFriendly: 4,
-          value: 4,
-        },
-      },
-    ],
-  },
-  {
-    id: "cafe-08",
-    slug: "north-loop-lab",
-    name: "North Loop Lab",
-    tagline: "Specialty coffee bar di utara dengan meja panjang dan fokus kerja.",
-    area: "Kaliurang",
-    address: "Jl. Kaliurang Km 9, Sleman",
-    priceLevel: "menengah",
-    coordinates: { latitude: -7.7483, longitude: 110.3818 },
-    coverImage:
-      "https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=1200&q=80",
-    featureHighlights: ["Filter coffee rapi", "Workstation nyaman", "Sore tidak terlalu padat"],
-    bestFor: ["Kerja individual", "Coffee tasting"],
-    amenities: {
-      hasSockets: true,
-      hasMusholla: true,
-      hasParking: true,
-      smokingArea: false,
-      indoorOutdoor: false,
-    },
-    description: "Cafe mock untuk pengunjung yang lebih peduli kopi dan workflow tenang.",
-    openingHours: "08.00 - 23.00",
-    contactPhone: "0812-0000-0018",
-    instagram: "@northlooplab",
-    mapsUrl: "https://maps.google.com/?q=-7.7483,110.3818",
-    galleryImages: [
-      "https://images.unsplash.com/photo-1517705008128-361805f42e86?auto=format&fit=crop&w=1200&q=80",
-    ],
-    ratingBreakdown: {
-      food: 4.0,
-      drink: 4.8,
-      wifi: 4.6,
-      ambience: 4.4,
-      workFriendly: 4.8,
-      value: 4.1,
-    },
-    recommendedMenu: [
-      { name: "V60 Ethiopia", priceLabel: "Rp35k", note: "floral" },
-      { name: "Tuna Melt", priceLabel: "Rp41k", note: "cepat dan gurih" },
-    ],
-    reviews: [
-      {
-        id: "review-09",
-        cafeId: "cafe-08",
-        author: "Bayu",
-        role: "Developer",
-        comment: "Kerja solo paling enak di sini, suasana tenang dan kopi serius.",
-        visitDate: "2026-04-18",
-        createdAt: "2026-04-18T17:00:00+07:00",
-        ratings: {
-          food: 4,
-          drink: 5,
-          wifi: 5,
-          ambience: 4,
-          workFriendly: 5,
-          value: 4,
-        },
-      },
-    ],
-  },
-  {
-    id: "cafe-09",
-    slug: "jogja-brew-library",
-    name: "Jogja Brew Library",
-    tagline: "Cafe mock dengan rak buku dan corner tenang untuk baca.",
-    area: "Pusat Kota",
-    address: "Jl. Cik Di Tiro No. 14, Yogyakarta",
-    priceLevel: "menengah",
-    coordinates: { latitude: -7.7787, longitude: 110.3765 },
-    coverImage:
-      "https://images.unsplash.com/photo-1493857671505-72967e2e2760?auto=format&fit=crop&w=1200&q=80",
-    featureHighlights: ["Rak buku", "Suara lembut", "Nongkrong santai"],
-    bestFor: ["Baca", "Nugas ringan"],
-    amenities: {
-      hasSockets: true,
-      hasMusholla: false,
-      hasParking: true,
-      smokingArea: false,
-      indoorOutdoor: false,
-    },
-    description: "Cafe mock yang menggabungkan suasana perpustakaan kecil dan coffee bar.",
-    openingHours: "09.00 - 22.00",
-    contactPhone: "0812-0000-0019",
-    instagram: "@jogjabrewlibrary",
-    mapsUrl: "https://maps.google.com/?q=-7.7787,110.3765",
-    galleryImages: [
-      "https://images.unsplash.com/photo-1485182708500-e8f1f318ba72?auto=format&fit=crop&w=1200&q=80",
-    ],
-    ratingBreakdown: {
-      food: 4.1,
-      drink: 4.4,
-      wifi: 4.3,
-      ambience: 4.7,
-      workFriendly: 4.4,
-      value: 4.2,
-    },
-    recommendedMenu: [
-      { name: "Sea Salt Latte", priceLabel: "Rp29k", note: "creamy" },
-      { name: "Banana Bread", priceLabel: "Rp24k", note: "pairing aman" },
-    ],
-    reviews: [
-      {
-        id: "review-10",
-        cafeId: "cafe-09",
-        author: "Nino",
-        role: "Copywriter",
-        comment: "Buat baca dan kerja ringan enak, ambience-nya kuat.",
-        visitDate: "2026-04-07",
-        createdAt: "2026-04-07T21:10:00+07:00",
-        ratings: {
-          food: 4,
-          drink: 4,
-          wifi: 4,
-          ambience: 5,
-          workFriendly: 4,
-          value: 4,
-        },
-      },
-    ],
-  },
-  {
-    id: "cafe-10",
-    slug: "studio-south-coffee",
-    name: "Studio South Coffee",
-    tagline: "Cafe dengan spot semi-outdoor dan makanan berat cukup serius.",
-    area: "Selatan",
-    address: "Jl. Imogiri Barat No. 33, Bantul",
-    priceLevel: "menengah",
-    coordinates: { latitude: -7.8331, longitude: 110.3434 },
-    coverImage:
-      "https://images.unsplash.com/photo-1470337458703-46ad1756a187?auto=format&fit=crop&w=1200&q=80",
-    featureHighlights: ["Makan berat bagus", "Outdoor lega", "Parkir mudah"],
-    bestFor: ["Makan berat", "Nongkrong sore"],
-    amenities: {
-      hasSockets: false,
-      hasMusholla: true,
-      hasParking: true,
-      smokingArea: true,
-      indoorOutdoor: true,
-    },
-    description: "Cafe mock dengan traffic keluarga dan komunitas kecil.",
-    openingHours: "11.00 - 23.00",
-    contactPhone: "0812-0000-0020",
-    instagram: "@studiosouthcoffee",
-    mapsUrl: "https://maps.google.com/?q=-7.8331,110.3434",
-    galleryImages: [
-      "https://images.unsplash.com/photo-1528605248644-14dd04022da1?auto=format&fit=crop&w=1200&q=80",
-    ],
-    ratingBreakdown: {
-      food: 4.7,
-      drink: 4.0,
-      wifi: 3.7,
-      ambience: 4.4,
-      workFriendly: 3.8,
-      value: 4.3,
-    },
-    recommendedMenu: [
-      { name: "Chicken Steak Sambal Roa", priceLabel: "Rp48k", note: "main course favorit" },
-      { name: "Yuzu Sparkling", priceLabel: "Rp28k", note: "pendamping ringan" },
-    ],
-    reviews: [
-      {
-        id: "review-11",
-        cafeId: "cafe-10",
-        author: "Sinta",
-        role: "Food Hunter",
-        comment: "Lebih cocok buat makan dan nongkrong daripada kerja fokus.",
-        visitDate: "2026-04-02",
-        createdAt: "2026-04-03T10:40:00+07:00",
-        ratings: {
-          food: 5,
-          drink: 4,
-          wifi: 3,
-          ambience: 4,
-          workFriendly: 3,
-          value: 4,
-        },
-      },
-    ],
-  },
-  {
-    id: "cafe-11",
-    slug: "urban-porch-seturan",
-    name: "Urban Porch Seturan",
-    tagline: "Cafe modern untuk meet-up cepat dan coffee break dekat kampus.",
-    area: "Seturan",
-    address: "Jl. Seturan Raya No. 44, Sleman",
-    priceLevel: "menengah",
-    coordinates: { latitude: -7.7728, longitude: 110.4121 },
-    coverImage:
-      "https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=1200&q=80",
-    featureHighlights: ["Lokasi strategis", "Coffee cukup stabil", "Meeting 2-3 orang enak"],
-    bestFor: ["Meet-up cepat", "Coffee break"],
-    amenities: {
-      hasSockets: true,
-      hasMusholla: false,
-      hasParking: true,
-      smokingArea: true,
-      indoorOutdoor: true,
-    },
-    description: "Cafe mock semi-urban dengan sirkulasi cepat dan layout compact.",
-    openingHours: "08.00 - 23.30",
-    contactPhone: "0812-0000-0021",
-    instagram: "@urbanporchseturan",
-    mapsUrl: "https://maps.google.com/?q=-7.7728,110.4121",
-    galleryImages: [
-      "https://images.unsplash.com/photo-1461988320302-91bde64fc8e4?auto=format&fit=crop&w=1200&q=80",
-    ],
-    ratingBreakdown: {
-      food: 4.1,
-      drink: 4.3,
-      wifi: 4.4,
-      ambience: 4.2,
-      workFriendly: 4.3,
-      value: 4.1,
-    },
-    recommendedMenu: [
-      { name: "Latte", priceLabel: "Rp28k", note: "aman buat daily" },
-      { name: "Pesto Toast", priceLabel: "Rp34k", note: "ringan tapi proper" },
-    ],
-    reviews: [
-      {
-        id: "review-12",
-        cafeId: "cafe-11",
-        author: "Tyo",
-        role: "Account Executive",
-        comment: "Kalau meeting cepat dekat Seturan, ini paling praktis.",
-        visitDate: "2026-04-16",
-        createdAt: "2026-04-16T12:00:00+07:00",
-        ratings: {
-          food: 4,
-          drink: 4,
-          wifi: 4,
-          ambience: 4,
-          workFriendly: 4,
-          value: 4,
-        },
-      },
-    ],
-  },
-  {
-    id: "cafe-12",
-    slug: "campus-yard-coffee",
-    name: "Campus Yard Coffee",
-    tagline: "Hidden spot murah dekat kampus dengan ruang semi-terbuka.",
-    area: "Gejayan",
-    address: "Jl. Selokan Mataram No. 9, Sleman",
-    priceLevel: "murah",
-    coordinates: { latitude: -7.7694, longitude: 110.3882 },
-    coverImage:
-      "https://images.unsplash.com/photo-1513267048331-5611cad62e41?auto=format&fit=crop&w=1200&q=80",
-    featureHighlights: ["Budget-friendly", "Colokan cukup", "Tempat rame malam"],
-    bestFor: ["Nugas hemat", "Nongkrong mahasiswa"],
-    amenities: {
-      hasSockets: true,
-      hasMusholla: true,
-      hasParking: true,
-      smokingArea: true,
-      indoorOutdoor: true,
-    },
-    description: "Cafe mock murah dengan demand tinggi di sekitar area kampus.",
-    openingHours: "10.00 - 00.30",
-    contactPhone: "0812-0000-0022",
-    instagram: "@campusyardcoffee",
-    mapsUrl: "https://maps.google.com/?q=-7.7694,110.3882",
-    galleryImages: [
-      "https://images.unsplash.com/photo-1522120691812-dcdfb625f397?auto=format&fit=crop&w=1200&q=80",
-    ],
-    ratingBreakdown: {
-      food: 4.0,
-      drink: 4.1,
-      wifi: 4.2,
-      ambience: 4.0,
-      workFriendly: 4.4,
-      value: 4.7,
-    },
-    recommendedMenu: [
-      { name: "Es Kopi Gula Aren", priceLabel: "Rp19k", note: "best seller" },
-      { name: "Rice Bowl Sambal Matah", priceLabel: "Rp25k", note: "murah meriah" },
-    ],
-    reviews: [
-      {
-        id: "review-13",
-        cafeId: "cafe-12",
-        author: "Lia",
-        role: "Mahasiswa",
-        comment: "Buat nugas hemat dan rame-rame aman, tinggal cari jam sepi.",
-        visitDate: "2026-04-09",
-        createdAt: "2026-04-09T22:05:00+07:00",
-        ratings: {
-          food: 4,
-          drink: 4,
-          wifi: 4,
-          ambience: 4,
-          workFriendly: 4,
-          value: 5,
-        },
-      },
-    ],
-  },
-];
+type OsmWfcCandidate = {
+  source: string;
+  sourceId: string;
+  name: string;
+  slug: string;
+  amenity: string;
+  category: "cafe" | "coffee_shop" | "coworking_space" | "wifi_spot" | "other";
+  areaHint: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+  phone: string;
+  website: string;
+  instagram: string;
+  imageUrl: string;
+  imageSource: string;
+  imageStatus: "scraped" | "fallback" | "missing";
+  realImageUrl: string;
+  fallbackCoverImage: string;
+  openingHours: string;
+  cuisine: string;
+  internetAccess: string;
+  hasWifiSignal: boolean;
+  wfcScore: number;
+  rawTags: Record<string, string>;
+  curationStatus: string;
+  notes: string;
+  webSignalScore?: number;
+  freshnessStatus?: "has-web-signal" | "osm-only";
+  lastSignalAt?: string;
+  sourceMentions?: Array<{
+    sourceId: string;
+    type: string;
+    publisher: string;
+    title: string;
+    url: string;
+    publishedAt: string;
+    fetchedAt: string;
+    matchedAliases: string[];
+    keywordHits: string[];
+    snippet: string;
+  }>;
+};
 
-export const mockCuratedLists: CuratedList[] = [
-  {
-    id: "list-01",
-    slug: "cafe-buat-skripsi-seharian",
-    title: "Cafe Buat Skripsi Seharian",
-    summary: "Prioritas ke wifi, colokan, kursi nyaman, dan harga yang masih masuk akal.",
-    description:
-      "Kurasi mock untuk orang yang butuh duduk lama, internet stabil, dan rasa aman kalau perlu stay berjam-jam.",
-    heroLabel: "Fokus & produktif",
-    cafeSlugs: [
-      "space-roastery-seturan",
-      "kopi-kampus-kaliurang",
-      "senja-works-gejayan",
-      "north-loop-lab",
-      "campus-yard-coffee",
-    ],
-  },
-  {
-    id: "list-02",
-    slug: "cafe-makanan-enak-bukan-cuma-kopi",
-    title: "Cafe Makanan Enak, Bukan Cuma Kopi",
-    summary: "Buat yang cari menu serius dan bukan sekadar tempat ngopi.",
-    description:
-      "Kurasi mock untuk pengguna yang memilih cafe berdasarkan kualitas makanan dan kemungkinan balik lagi karena menunya.",
-    heroLabel: "Kuliner + suasana",
-    cafeSlugs: [
-      "teras-kotabaru",
-      "prawiro-brew-house",
-      "studio-south-coffee",
-      "selatan-courtyard",
-    ],
-  },
-  {
-    id: "list-03",
-    slug: "cafe-dekat-kampus-budget-aman",
-    title: "Cafe Dekat Kampus Budget Aman",
-    summary: "Tempat murah dan praktis untuk mahasiswa sekitar utara Jogja.",
-    description:
-      "Kurasi mock dengan fokus ke nilai harga, akses mudah, dan menu yang masih aman untuk kunjungan rutin.",
-    heroLabel: "Value pick",
-    cafeSlugs: [
-      "kopi-kampus-kaliurang",
-      "campus-yard-coffee",
-      "urban-porch-seturan",
-      "space-roastery-seturan",
-    ],
-  },
-];
+const candidates = selectedCandidates as unknown as OsmWfcCandidate[];
+
+export const mockCafes: CafeDetail[] = candidates.map(toCafeDetail);
+
+export const mockCuratedLists: CuratedList[] = buildCuratedLists(candidates);
+
+function toCafeDetail(candidate: OsmWfcCandidate, index: number): CafeDetail {
+  const id = `osm-${candidate.sourceId.replace("/", "-")}`;
+  const area = normalizeArea(candidate);
+  const ratingBreakdown = buildRatingBreakdown(candidate);
+  const coverImage = pickCoverImage(candidate);
+  const fallbackGallery = candidate.fallbackCoverImage || "/dataset-images/wfc-cafe.svg";
+
+  return {
+    id,
+    slug: candidate.slug,
+    name: candidate.name,
+    tagline: buildTagline(candidate),
+    area,
+    address: buildDisplayAddress(candidate, area),
+    priceLevel: inferPriceLevel(candidate),
+    coordinates: {
+      latitude: candidate.latitude,
+      longitude: candidate.longitude,
+    },
+    coverImage,
+    featureHighlights: buildFeatureHighlights(candidate),
+    bestFor: buildBestFor(candidate),
+    amenities: {
+      hasSockets: candidate.category === "coworking_space" || candidate.wfcScore >= 4,
+      hasMusholla: Boolean(candidate.rawTags.muslim || candidate.rawTags.prayer_room),
+      hasParking: candidate.category !== "coworking_space" || candidate.wfcScore >= 4,
+      smokingArea: candidate.rawTags.outdoor_seating === "yes",
+      indoorOutdoor: candidate.rawTags.outdoor_seating === "yes" || candidate.category !== "wifi_spot",
+    },
+    description: buildDescription(candidate, area),
+    openingHours: candidate.openingHours || "Belum ada data jam buka dari OSM",
+    contactPhone: candidate.phone,
+    instagram: normalizeInstagram(candidate.instagram),
+    website: candidate.website,
+    mapsUrl: `https://www.google.com/maps/search/?api=1&query=${candidate.latitude},${candidate.longitude}`,
+    galleryImages:
+      candidate.imageStatus === "scraped"
+        ? [coverImage]
+        : Array.from(new Set([coverImage, fallbackGallery])).filter(Boolean),
+    ratingBreakdown,
+    recommendedMenu: buildRecommendedMenu(candidate),
+    reviews: [buildSyntheticReview(candidate, id, ratingBreakdown, index)],
+  };
+}
+
+function buildCuratedLists(items: OsmWfcCandidate[]): CuratedList[] {
+  const byScore = [...items].sort(
+    (a, b) =>
+      (b.webSignalScore ?? 0) - (a.webSignalScore ?? 0) ||
+      b.wfcScore - a.wfcScore ||
+      a.name.localeCompare(b.name, "id"),
+  );
+  const coworking = byScore.filter((item) => item.category === "coworking_space");
+  const coffee = byScore.filter((item) => item.category === "coffee_shop");
+  const wifiReady = byScore.filter((item) => item.hasWifiSignal || item.internetAccess);
+
+  return [
+    {
+      id: "list-osm-01",
+      slug: "spot-wfc-terkurasi-osm",
+      title: "Spot WFC Terkurasi OSM",
+      summary: "Kandidat paling kuat dari OpenStreetMap buat kerja, nugas, dan laptop-an di Jogja.",
+      description:
+        "List ini dibentuk dari dataset OSM lokal: prioritas ke nama yang jelas, sinyal wifi, workspace, dan skor WFC. Tetap perlu validasi manual untuk colokan, suasana, dan kondisi terbaru.",
+      heroLabel: "OSM candidates",
+      cafeSlugs: byScore.slice(0, 12).map((item) => item.slug),
+    },
+    {
+      id: "list-osm-02",
+      slug: "coworking-dan-workspace-jogja",
+      title: "Coworking dan Workspace Jogja",
+      summary: "Buat yang butuh suasana lebih serius dari sekadar nongkrong kopi.",
+      description:
+        "Kurasi tempat dengan sinyal coworking/workspace dari dataset. Cocok buat call, sprint kerja, atau pindah suasana tanpa gambling berlebihan.",
+      heroLabel: "Kerja serius",
+      cafeSlugs: coworking.slice(0, 12).map((item) => item.slug),
+    },
+    {
+      id: "list-osm-03",
+      slug: "coffee-shop-buat-nugas",
+      title: "Coffee Shop Buat Nugas",
+      summary: "Coffee shop yang namanya kuat ke kopi dan potensial buat sesi fokus.",
+      description:
+        "List ini fokus ke coffee shop dari dataset OSM. Cocok buat mahasiswa, freelancer, dan remote worker yang nyari tempat mulai dari kopi dulu.",
+      heroLabel: "Kopi + fokus",
+      cafeSlugs: coffee.slice(0, 12).map((item) => item.slug),
+    },
+    {
+      id: "list-osm-04",
+      slug: "wifi-ready-jogja",
+      title: "Wifi Ready Jogja",
+      summary: "Tempat yang punya indikasi wifi atau internet access di data OSM.",
+      description:
+        "Ini bukan jaminan speedtest, tapi start point paling masuk akal sebelum validasi manual. Pakai list ini kalau kebutuhan utamanya online meeting atau upload tugas.",
+      heroLabel: "Wifi signal",
+      cafeSlugs: wifiReady.slice(0, 12).map((item) => item.slug),
+    },
+  ];
+}
+
+function normalizeArea(candidate: OsmWfcCandidate) {
+  const areaHint = clean(candidate.areaHint);
+  const rawArea = areaHint || candidate.rawTags["addr:suburb"] || candidate.rawTags["addr:village"];
+
+  if (/sleman|condong|catur|depok/i.test(rawArea)) return "Sleman";
+  if (/kadipaten|kraton|prawiro|mantrijeron/i.test(rawArea)) return "Prawirotaman";
+  if (/yogyakarta|jogja|kota/i.test(rawArea)) return "Yogyakarta";
+  if (/ambarketawang|gamping/i.test(rawArea)) return "Gamping";
+  if (/pogung|kaliurang/i.test(rawArea)) return "Kaliurang";
+
+  const { latitude, longitude } = candidate;
+
+  if (latitude > -7.755) return "Kaliurang";
+  if (longitude > 110.397 && latitude > -7.792) return "Seturan";
+  if (longitude > 110.385 && latitude > -7.805) return "Gejayan";
+  if (latitude < -7.81 && longitude < 110.39) return "Prawirotaman";
+  if (longitude < 110.355) return "Gamping";
+
+  return "Yogyakarta";
+}
+
+function buildDisplayAddress(candidate: OsmWfcCandidate, area: string) {
+  const address =
+    clean(candidate.address) ||
+    clean(candidate.rawTags.description) ||
+    clean(candidate.rawTags["addr:full"]);
+
+  if (address) {
+    return address;
+  }
+
+  return `Area ${area}, titik OSM ${candidate.latitude.toFixed(5)}, ${candidate.longitude.toFixed(5)}`;
+}
+
+function inferPriceLevel(candidate: OsmWfcCandidate): PriceLevel {
+  const fields = [candidate.name, candidate.category, candidate.cuisine, candidate.rawTags.description]
+    .join(" ")
+    .toLowerCase();
+
+  if (/cowork|workspace|premium|roastery|reserve|specialty/.test(fields)) {
+    return "premium";
+  }
+
+  if (/kampus|murah|warung|budget|angkring/.test(fields)) {
+    return "murah";
+  }
+
+  return "menengah";
+}
+
+function pickCoverImage(candidate: OsmWfcCandidate) {
+  if (candidate.imageUrl && isDisplayImageAllowed(candidate.imageUrl)) {
+    return candidate.imageUrl;
+  }
+
+  return candidate.fallbackCoverImage || "/dataset-images/wfc-cafe.svg";
+}
+
+function isDisplayImageAllowed(value: string) {
+  if (value.startsWith("/")) {
+    return true;
+  }
+
+  try {
+    const hostname = new URL(value).hostname.toLowerCase();
+
+    return ["images.unsplash.com", "pameo.co", "antologi.group"].includes(hostname);
+  } catch {
+    return false;
+  }
+}
+
+function buildTagline(candidate: OsmWfcCandidate) {
+  const categoryLabel = getCategoryLabel(candidate);
+  const wifiLabel = candidate.hasWifiSignal ? "punya sinyal wifi di OSM" : "masih perlu cek wifi manual";
+  const area = normalizeArea(candidate);
+  const webSignalLabel = candidate.freshnessStatus === "has-web-signal" ? "dan sudah muncul di source web terbaru" : "";
+
+  return `${categoryLabel} di ${area}, ${wifiLabel} ${webSignalLabel}, cocok jadi kandidat WFC sebelum lo gas ke lokasi.`
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function buildDescription(candidate: OsmWfcCandidate, area: string) {
+  const sourceLabel = candidate.sourceId.replace("/", " ");
+
+  return [
+    `Candidate from OpenStreetMap untuk kebutuhan WFC di area ${area}.`,
+    `Data awal ini membaca kategori, nama tempat, koordinat, website, jam buka, dan sinyal internet kalau tersedia dari OSM (${sourceLabel}).`,
+    "Sebelum dijadikan rekomendasi final, tetap validasi manual: kualitas wifi, colokan, kursi, noise level, dan apakah tempatnya masih aktif.",
+  ].join(" ");
+}
+
+function buildFeatureHighlights(candidate: OsmWfcCandidate) {
+  const highlights = new Set<string>();
+
+  highlights.add(getCategoryLabel(candidate));
+
+  if (candidate.freshnessStatus === "has-web-signal") highlights.add("Disebut artikel");
+  if (candidate.hasWifiSignal || candidate.internetAccess) highlights.add("Indikasi wifi");
+  if (candidate.wfcScore >= 5) highlights.add("Skor WFC tinggi");
+  if (candidate.wfcScore >= 4) highlights.add("Potensial buat fokus");
+  if (candidate.openingHours) highlights.add("Jam buka tersedia");
+  if (candidate.website) highlights.add("Ada website");
+  if (candidate.rawTags.outdoor_seating === "yes") highlights.add("Ada outdoor");
+
+  return Array.from(highlights).slice(0, 4);
+}
+
+function buildBestFor(candidate: OsmWfcCandidate) {
+  if (candidate.category === "coworking_space") {
+    return ["Remote work", "Meeting", "Deep work"];
+  }
+
+  if (candidate.hasWifiSignal) {
+    return ["Nugas", "Kerja remote", "Online meeting"];
+  }
+
+  if (candidate.category === "coffee_shop") {
+    return ["Coffee break", "Nugas ringan", "Cari mood"];
+  }
+
+  return ["Survey spot", "Nugas ringan"];
+}
+
+function buildRatingBreakdown(candidate: OsmWfcCandidate): RatingBreakdown {
+  const base = clampRating(3.7 + candidate.wfcScore * 0.16);
+  const wifi = clampRating(candidate.hasWifiSignal ? base + 0.4 : base - 0.2);
+  const workFriendly = clampRating(base + (candidate.category === "coworking_space" ? 0.45 : 0.1));
+  const value = clampRating(candidate.category === "coworking_space" ? base - 0.15 : base + 0.05);
+
+  return {
+    food: clampRating(base - 0.15),
+    drink: clampRating(candidate.category === "coffee_shop" ? base + 0.2 : base),
+    wifi,
+    ambience: clampRating(base),
+    workFriendly,
+    value,
+  };
+}
+
+function buildRecommendedMenu(candidate: OsmWfcCandidate): CafeMenuItem[] {
+  if (candidate.category === "coworking_space") {
+    return [
+      { name: "Day Pass / Workspace", priceLabel: "Cek lokasi", note: "validasi paket kerja langsung" },
+      { name: "Kopi Pendamping", priceLabel: "Cek menu", note: "buat sesi fokus panjang" },
+    ];
+  }
+
+  if (candidate.category === "coffee_shop") {
+    return [
+      { name: "Kopi Signature", priceLabel: "Cek menu", note: "pilihan aman buat mulai sesi" },
+      { name: "Manual Brew / Espresso", priceLabel: "Cek menu", note: "kalau butuh kopi yang lebih niat" },
+    ];
+  }
+
+  return [
+    { name: "Menu utama", priceLabel: "Cek menu", note: "data menu belum tersedia dari OSM" },
+    { name: "Minuman fokus", priceLabel: "Cek menu", note: "validasi langsung di lokasi" },
+  ];
+}
+
+function buildSyntheticReview(
+  candidate: OsmWfcCandidate,
+  cafeId: string,
+  ratings: RatingBreakdown,
+  index: number,
+): CafeReview {
+  return {
+    id: `osm-review-${index + 1}`,
+    cafeId,
+    author: "Kurator WFC Jogja",
+    role: "Dataset reviewer",
+    comment:
+      "Review WFC awal dari dataset OSM. Tempat ini masuk kandidat, tapi masih perlu validasi manual untuk colokan, ambience, dan kondisi ramai.",
+    visitDate: "2026-04-26",
+    createdAt: "2026-04-26T09:00:00+07:00",
+    ratings,
+  };
+}
+
+function normalizeInstagram(value: string) {
+  const instagram = clean(value);
+
+  if (!instagram) {
+    return undefined;
+  }
+
+  return instagram.startsWith("@") ? instagram : `@${instagram.replace(/^https?:\/\/(www\.)?instagram\.com\//, "")}`;
+}
+
+function getCategoryLabel(candidate: OsmWfcCandidate) {
+  switch (candidate.category) {
+    case "coworking_space":
+      return "Coworking space";
+    case "coffee_shop":
+      return "Coffee shop";
+    case "wifi_spot":
+      return "Wifi spot";
+    case "cafe":
+      return "Cafe";
+    case "other":
+      return "WFC candidate";
+  }
+}
+
+function clampRating(value: number) {
+  return Number(Math.min(4.9, Math.max(3.6, value)).toFixed(1));
+}
+
+function clean(value?: string) {
+  return value?.trim() ?? "";
+}

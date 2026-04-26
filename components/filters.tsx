@@ -78,13 +78,13 @@ function FilterCheck({
   name: string;
 }) {
   return (
-    <label className="group flex h-[3.25rem] cursor-pointer items-center gap-3 rounded-[1.25rem] border border-emerald-100 bg-white px-4 text-sm font-black text-emerald-950 transition hover:border-emerald-300 hover:bg-emerald-50/70">
+    <label className="group flex h-[3.25rem] cursor-pointer items-center gap-3 rounded-[1.25rem] border border-emerald-100 bg-white px-4 text-sm font-black text-emerald-950 transition hover:border-emerald-300 hover:bg-emerald-50/70 has-[:checked]:border-emerald-700 has-[:checked]:bg-emerald-700 has-[:checked]:!text-white">
       <input
         type="checkbox"
         name={name}
         value="true"
         defaultChecked={defaultChecked}
-        className="h-5 w-5 rounded-md border-emerald-200 accent-emerald-700"
+        className="h-5 w-5 rounded-md border-emerald-200 accent-white"
       />
       {label}
     </label>

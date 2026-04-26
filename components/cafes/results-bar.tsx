@@ -32,9 +32,9 @@ export function ResultsBar({ totalResults, activeFilters, hasActiveFilters }: Re
             activeFilters.map((filter) => (
               <span
                 key={filter}
-                className="inline-flex items-center gap-1.5 rounded-full border border-emerald-100 bg-emerald-50/50 px-3 py-1.5 text-[10px] font-black text-emerald-800 transition hover:bg-emerald-100"
+                className="inline-flex items-center gap-1.5 rounded-full border border-emerald-700 bg-emerald-700 px-3 py-1.5 text-[10px] font-black !text-white transition hover:bg-emerald-800"
               >
-                <div className="h-1 w-1 rounded-full bg-emerald-500" />
+                <div className="h-1 w-1 rounded-full bg-white" />
                 {filter}
               </span>
             ))

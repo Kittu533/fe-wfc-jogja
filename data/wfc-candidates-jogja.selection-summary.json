@@ -1,0 +1,27 @@
+{
+  "generatedAt": "2026-04-26T09:12:57.509Z",
+  "inputPath": "data/wfc-candidates-jogja.enriched.json",
+  "outputPath": "data/wfc-candidates-jogja.selected.json",
+  "selectionMode": "real-images",
+  "totalInput": 135,
+  "totalSelected": 2,
+  "rejected": 133,
+  "selectedItems": [
+    {
+      "name": "Crônica Creative Workspace",
+      "slug": "cronica-creative-workspace",
+      "imageUrl": "https://antologi.group/wp-content/themes/anto/assets/img/Moshi_images/Moshi_red.png",
+      "imageSource": "website-og-image",
+      "imageStatus": "scraped",
+      "webSignalScore": 14
+    },
+    {
+      "name": "Nilu Coffee",
+      "slug": "nilu-coffee",
+      "imageUrl": "https://pameo.co/wp-content/uploads/2024/02/Mask-Group-31.jpg",
+      "imageSource": "website-og-image",
+      "imageStatus": "scraped",
+      "webSignalScore": 0
+    }
+  ]
+}

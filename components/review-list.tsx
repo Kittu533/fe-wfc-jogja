@@ -107,7 +107,7 @@ export function ReviewList({
               <div className="mt-8 relative">
                 <div className="absolute -left-4 top-0 w-1 h-full bg-emerald-100 rounded-full" />
                 <p className="text-lg leading-relaxed text-slate-600 font-medium italic">
-                  "{review.comment}"
+                  &ldquo;{review.comment}&rdquo;
                 </p>
               </div>
 

@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "test": "vitest run"
+    "test": "vitest run",
+    "dataset:osm": "node scripts/fetch-osm-cafes-jogja.mjs",
+    "dataset:web": "node scripts/enrich-dataset-from-web.mjs",
+    "dataset:select": "node scripts/select-dataset.mjs",
+    "dataset:refresh": "npm run dataset:osm && npm run dataset:web && npm run dataset:select"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import L from "leaflet";
 import {
@@ -33,23 +33,12 @@ const createCustomIcon = (rating: number) => {
 };
 
 export default function MapViewClient({ cafes }: { cafes: CafeListItem[] }) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) return null;
-
-  const center =
-    cafes.length > 0
-      ? ([cafes[0].coordinates.latitude, cafes[0].coordinates.longitude] as [number, number])
-      : ([-7.797068, 110.370529] as [number, number]);
+  const center = [-7.797068, 110.370529] as [number, number];
 
   return (
     <MapContainer
       center={center}
-      zoom={14}
+      zoom={12}
       scrollWheelZoom
       className="z-0 min-h-[600px] rounded-[2rem] shadow-inner"
     >
@@ -67,9 +56,11 @@ export default function MapViewClient({ cafes }: { cafes: CafeListItem[] }) {
           <Popup className="custom-popup">
             <div className="w-64 overflow-hidden rounded-xl bg-white p-0">
               <div className="relative h-24 w-full">
-                <img 
+                <Image 
                   src={cafe.coverImage} 
                   alt={cafe.name} 
+                  fill
+                  sizes="256px"
                   className="h-full w-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />

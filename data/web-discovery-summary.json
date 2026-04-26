@@ -1,0 +1,125 @@
+{
+  "generatedAt": "2026-04-26T09:12:57.287Z",
+  "inputDataset": "data/osm-wfc-candidates-jogja.json",
+  "outputDataset": "data/wfc-candidates-jogja.enriched.json",
+  "sourceCount": 5,
+  "fetchedSourceCount": 4,
+  "socialSignalCount": 0,
+  "mentionedCandidateCount": 3,
+  "topMentionedCandidates": [
+    {
+      "name": "Ekologi Desk & Coffee",
+      "slug": "ekologi-desk-coffee",
+      "webSignalScore": 22,
+      "mentions": 2,
+      "sources": [
+        "IDN Times Jogja",
+        "Media Jogja"
+      ]
+    },
+    {
+      "name": "Crônica Creative Workspace",
+      "slug": "cronica-creative-workspace",
+      "webSignalScore": 14,
+      "mentions": 1,
+      "sources": [
+        "IDN Times Jogja"
+      ]
+    },
+    {
+      "name": "Jogja Digital Valley",
+      "slug": "jogja-digital-valley",
+      "webSignalScore": 13,
+      "mentions": 1,
+      "sources": [
+        "KRJogja"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "krjogja-coworking-nugas",
+      "type": "article",
+      "publisher": "KRJogja",
+      "title": "7 Coworking Space di Jogja Paling Nyaman Buat Nugas: Nyaman, Estetik, dan Ramah Mahasiswa - Krjogja",
+      "url": "https://www.krjogja.com/ragam/1246189050/7-coworking-space-di-jogja-paling-nyaman-buat-nugas-nyaman-estetik-dan-ramah-mahasiswa",
+      "fetchedAt": "2026-04-26T09:12:46.957Z",
+      "publishedAt": "",
+      "keywordHits": [
+        "nugas",
+        "kerja",
+        "coworking",
+        "wi-fi",
+        "colokan",
+        "meeting",
+        "skripsi",
+        "mahasiswa"
+      ]
+    },
+    {
+      "id": "idntimes-coworking-jogja",
+      "type": "article",
+      "publisher": "IDN Times Jogja",
+      "title": "13 Coworking Space di Jogja, Nyaman dan Bikin Semangat Kerja",
+      "url": "https://jogja.idntimes.com/news/jogja/coworking-space-di-jogja-c1c2-01-5fz5v-b1t3mt",
+      "fetchedAt": "2026-04-26T09:12:47.038Z",
+      "publishedAt": "",
+      "keywordHits": [
+        "kerja",
+        "coworking",
+        "wifi",
+        "wi-fi",
+        "colokan",
+        "meeting",
+        "remote",
+        "skripsi",
+        "mahasiswa"
+      ]
+    },
+    {
+      "id": "mediajogja-cafe-ugm-wifi",
+      "type": "article",
+      "publisher": "Media Jogja",
+      "title": "Rekomendasi Cafe di Sekitar Kampus UGM dengan WiFi Kencang untuk Nugas",
+      "url": "https://www.mediajogja.id/threads/rekomendasi-cafe-di-sekitar-kampus-ugm-dengan-wifi-kencang-untuk-nugas.4885/",
+      "fetchedAt": "2026-04-26T09:12:47.028Z",
+      "publishedAt": "",
+      "keywordHits": [
+        "nugas",
+        "kerja",
+        "coworking",
+        "wifi",
+        "internet",
+        "colokan",
+        "stop kontak",
+        "laptop",
+        "skripsi",
+        "mahasiswa",
+        "24 jam"
+      ]
+    },
+    {
+      "id": "nibble-cafe-nugas-jogja",
+      "type": "article",
+      "publisher": "Nibble",
+      "title": "10 Cafe untuk Nugas di Jogja yang Free Wi-Fi",
+      "url": "https://www.nibble.id/cafe-untuk-nugas-di-jogja-yang-free-wifi/",
+      "fetchedAt": "2026-04-26T09:12:47.044Z",
+      "publishedAt": "",
+      "keywordHits": [
+        "nugas",
+        "kerja",
+        "coworking",
+        "wifi",
+        "wi-fi",
+        "internet",
+        "colokan",
+        "stop kontak",
+        "laptop",
+        "mahasiswa",
+        "24 jam",
+        "buka 24"
+      ]
+    }
+  ]
+}

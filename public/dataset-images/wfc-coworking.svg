@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800" role="img" aria-label="Coworking fallback cover">
+  <rect width="1200" height="800" fill="#f8faf4"/>
+  <path d="M0 0h1200v800H0z" fill="#184d36"/>
+  <path d="M170 156h860v420H170z" fill="#dcead8"/>
+  <path d="M242 224h716v284H242z" fill="#f8faf4"/>
+  <path d="M320 604h560" stroke="#dcead8" stroke-width="44" stroke-linecap="round"/>
+  <path d="M500 508h200l34 96H466z" fill="#2f8f5b"/>
+  <circle cx="312" cy="304" r="34" fill="#2f8f5b"/>
+  <rect x="382" y="276" width="400" height="34" rx="17" fill="#184d36"/>
+  <rect x="382" y="348" width="292" height="34" rx="17" fill="#184d36" opacity=".75"/>
+  <rect x="382" y="420" width="478" height="34" rx="17" fill="#184d36" opacity=".45"/>
+  <text x="104" y="706" fill="#f8faf4" font-family="Arial, sans-serif" font-size="82" font-weight="900" letter-spacing="-3">COWORKING MODE</text>
+</svg>

@@ -1,0 +1,22 @@
+[
+  {
+    "id": "manual-thread-example-1",
+    "platform": "threads",
+    "url": "https://www.threads.net/@contoh/post/...",
+    "author": "@contoh",
+    "publishedAt": "2026-04-26T09:00:00+07:00",
+    "text": "Contoh input manual/API resmi: coffee shop Jogja yang enak buat nugas, wifi aman, colokan banyak.",
+    "mentionedPlaces": ["Nama Cafe Contoh"],
+    "keywords": ["nugas", "wifi", "colokan"]
+  },
+  {
+    "id": "manual-x-example-1",
+    "platform": "x",
+    "url": "https://x.com/contoh/status/...",
+    "author": "@contoh",
+    "publishedAt": "2026-04-26T09:00:00+07:00",
+    "text": "Contoh input dari X API resmi atau export manual, bukan browser scraping.",
+    "mentionedPlaces": ["Nama Cafe Contoh"],
+    "keywords": ["wfc", "coworking"]
+  }
+]

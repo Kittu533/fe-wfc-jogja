@@ -2,9 +2,10 @@
 
 import { motion } from "framer-motion";
 import { Coffee, MapPinned, PlugZap, Star } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 type MapStatProps = {
-  icon: any;
+  icon: LucideIcon;
   label: string;
   value: number;
   description: string;

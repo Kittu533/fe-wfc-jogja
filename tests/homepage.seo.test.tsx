@@ -2,6 +2,7 @@ import { render } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import HomePage, { metadata } from "@/app/page";
+import { mockCafes } from "@/lib/data/cafes";
 
 describe("homepage SEO", () => {
   it("exports enriched metadata for social previews and indexing", () => {
@@ -30,6 +31,8 @@ describe("homepage SEO", () => {
     expect(Array.isArray(payload["@graph"])).toBe(true);
     expect(payload["@graph"][0]["@type"]).toBe("WebSite");
     expect(payload["@graph"][1]["@type"]).toBe("ItemList");
-    expect(payload["@graph"][1].itemListElement).toHaveLength(3);
+    expect(payload["@graph"][1].itemListElement).toHaveLength(
+      Math.min(3, mockCafes.length),
+    );
   });
 });

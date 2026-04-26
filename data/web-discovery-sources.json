@@ -1,0 +1,42 @@
+[
+  {
+    "id": "liputan6-wfc-jogja-2025",
+    "type": "article",
+    "title": "26 Rekomendasi Cafe untuk WFC di Jogja",
+    "url": "https://www.liputan6.com/lifestyle/read/6224243/26-rekomendasi-cafe-untuk-wfc-di-jogja-fasilitas-lengkap-dan-buka-24-jam",
+    "publisher": "Liputan6",
+    "focus": ["wfc", "wifi", "colokan", "24 jam"]
+  },
+  {
+    "id": "krjogja-coworking-nugas",
+    "type": "article",
+    "title": "7 Coworking Space di Jogja Paling Nyaman Buat Nugas",
+    "url": "https://www.krjogja.com/ragam/1246189050/7-coworking-space-di-jogja-paling-nyaman-buat-nugas-nyaman-estetik-dan-ramah-mahasiswa",
+    "publisher": "KRJogja",
+    "focus": ["coworking", "nugas", "mahasiswa"]
+  },
+  {
+    "id": "idntimes-coworking-jogja",
+    "type": "article",
+    "title": "13 Coworking Space di Jogja",
+    "url": "https://jogja.idntimes.com/news/jogja/coworking-space-di-jogja-c1c2-01-5fz5v-b1t3mt",
+    "publisher": "IDN Times Jogja",
+    "focus": ["coworking", "kerja", "event"]
+  },
+  {
+    "id": "mediajogja-cafe-ugm-wifi",
+    "type": "article",
+    "title": "Rekomendasi Cafe di Sekitar Kampus UGM dengan WiFi Kencang untuk Nugas",
+    "url": "https://www.mediajogja.id/threads/rekomendasi-cafe-di-sekitar-kampus-ugm-dengan-wifi-kencang-untuk-nugas.4885/",
+    "publisher": "Media Jogja",
+    "focus": ["ugm", "wifi", "nugas"]
+  },
+  {
+    "id": "nibble-cafe-nugas-jogja",
+    "type": "article",
+    "title": "10 Cafe untuk Nugas di Jogja yang Free Wi-Fi",
+    "url": "https://www.nibble.id/cafe-untuk-nugas-di-jogja-yang-free-wifi/",
+    "publisher": "Nibble",
+    "focus": ["wifi", "nugas", "cafe"]
+  }
+]

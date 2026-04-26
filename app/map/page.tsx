@@ -12,6 +12,8 @@ import { getCafes } from "@/lib/services/cafes";
 import type { CafeListItem } from "@/lib/types";
 import { getPriceLabel } from "@/lib/utils/cafes";
 
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Peta Cafe Jogja",
   description: "Lihat semua cafe Jogja di peta interaktif dengan shortcut ke halaman detail.",

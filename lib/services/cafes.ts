@@ -10,8 +10,12 @@ import type {
 } from "@/lib/types";
 import { matchesCafeFilters, toCafeListItem } from "@/lib/utils/cafes";
 
+type PaginationInput = Pick<CafeFilters, "page" | "limit">;
+
 async function fetchJson<T>(path: string) {
-  const response = await fetch(`${API_BASE_URL}${path}`);
+  const response = await fetch(`${API_BASE_URL}${path}`, {
+    cache: "no-store",
+  });
 
   if (!response.ok) {
     throw new Error(`Failed to fetch ${path}`);
@@ -31,16 +35,28 @@ export async function getCafes(filters: CafeFilters = {}): Promise<CafesResponse
       params.set(key, String(value));
     });
 
-    return fetchJson<CafesResponse>(`/cafes?${params.toString()}`);
+    const response = await fetchJson<Partial<CafesResponse> & { items: CafesResponse["items"]; total: number }>(
+      `/cafes?${params.toString()}`,
+    );
+
+    return normalizeCafesResponse(response, filters);
   }
 
   const items = mockCafes
     .map(toCafeListItem)
     .filter((cafe) => matchesCafeFilters(cafe, filters));
+  const { items: paginatedItems, meta } = paginateItems(
+    items,
+    filters.page ?? 1,
+    filters.limit ?? 12,
+  );
 
   return {
-    items,
-    total: items.length,
+    items: paginatedItems,
+    total: meta.total,
+    page: meta.page,
+    limit: meta.limit,
+    totalPages: meta.totalPages,
     availableAreas: Array.from(new Set(mockCafes.map((cafe) => cafe.area))).sort(),
   };
 }
@@ -71,9 +87,24 @@ export async function getCuratedLists(): Promise<CuratedList[]> {
 
 export async function getCuratedListBySlug(
   slug: string,
+  pagination: PaginationInput = {},
 ): Promise<CuratedListWithCafes | null> {
   if (!isMockDataSource) {
-    return fetchJson<CuratedListWithCafes | null>(`/lists/${slug}`);
+    const params = new URLSearchParams();
+
+    Object.entries(pagination).forEach(([key, value]) => {
+      if (value === undefined) return;
+      params.set(key, String(value));
+    });
+
+    const query = params.toString();
+    const response = await fetchJson<Partial<CuratedListWithCafes> & Pick<CuratedListWithCafes, "cafes"> | null>(
+      `/lists/${slug}${query ? `?${query}` : ""}`,
+    );
+
+    if (!response) return null;
+
+    return normalizeCuratedListResponse(response as CuratedListWithCafes, pagination);
   }
 
   const curatedList = mockCuratedLists.find((item) => item.slug === slug);
@@ -82,11 +113,97 @@ export async function getCuratedListBySlug(
     return null;
   }
 
+  const allCafes = curatedList.cafeSlugs
+    .map((cafeSlug) => mockCafes.find((cafe) => cafe.slug === cafeSlug))
+    .filter((cafe): cafe is CafeDetail => Boolean(cafe))
+    .map(toCafeListItem);
+  const { items: cafes, meta } = paginateItems(
+    allCafes,
+    pagination.page ?? 1,
+    pagination.limit ?? 12,
+  );
+
   return {
     ...curatedList,
-    cafes: curatedList.cafeSlugs
-      .map((cafeSlug) => mockCafes.find((cafe) => cafe.slug === cafeSlug))
-      .filter((cafe): cafe is CafeDetail => Boolean(cafe))
-      .map(toCafeListItem),
+    cafes,
+    totalCafes: meta.total,
+    page: meta.page,
+    limit: meta.limit,
+    totalPages: meta.totalPages,
+  };
+}
+
+function paginateItems<T>(items: T[], page: number, limit: number) {
+  const total = items.length;
+  const totalPages = Math.max(1, Math.ceil(total / limit));
+  const safePage = Math.min(Math.max(1, page), totalPages);
+  const start = (safePage - 1) * limit;
+
+  return {
+    items: items.slice(start, start + limit),
+    meta: {
+      total,
+      page: safePage,
+      limit,
+      totalPages,
+    },
+  };
+}
+
+function normalizeCafesResponse(
+  response: Partial<CafesResponse> & { items: CafesResponse["items"]; total: number },
+  filters: CafeFilters,
+): CafesResponse {
+  if (
+    typeof response.page === "number" &&
+    typeof response.limit === "number" &&
+    typeof response.totalPages === "number"
+  ) {
+    return response as CafesResponse;
+  }
+
+  const { items, meta } = paginateItems(
+    response.items,
+    filters.page ?? 1,
+    filters.limit ?? 12,
+  );
+
+  return {
+    items,
+    total: response.total,
+    page: meta.page,
+    limit: meta.limit,
+    totalPages: Math.max(1, Math.ceil(response.total / meta.limit)),
+    availableAreas: response.availableAreas ?? [],
+  };
+}
+
+function normalizeCuratedListResponse(
+  response: CuratedListWithCafes,
+  pagination: PaginationInput,
+): CuratedListWithCafes {
+  if (
+    typeof response.page === "number" &&
+    typeof response.limit === "number" &&
+    typeof response.totalPages === "number" &&
+    typeof response.totalCafes === "number"
+  ) {
+    return response;
+  }
+
+  const totalCafes = response.totalCafes ?? response.cafes.length;
+  const { items: cafes, meta } = paginateItems(
+    response.cafes,
+    pagination.page ?? 1,
+    pagination.limit ?? 12,
+  );
+
+  return {
+    ...response,
+    cafes,
+    totalCafes,
+    page: meta.page,
+    limit: meta.limit,
+    totalPages: Math.max(1, Math.ceil(totalCafes / meta.limit)),
   };
 }
