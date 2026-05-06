@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import {
   Filter,
+  Laptop,
   MapPin,
   PlugZap,
   Search,
@@ -104,8 +105,8 @@ export default async function CafesPage({ searchParams }: CafesPageProps) {
         ) : (
           <div className="space-y-8">
             <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {result.items.map((cafe) => (
-                <CafeCard key={cafe.id} cafe={cafe} />
+              {result.items.map((cafe, index) => (
+                <CafeCard key={cafe.id} cafe={cafe} priority={index === 0} />
               ))}
             </section>
             <Pagination
@@ -124,18 +125,23 @@ export default async function CafesPage({ searchParams }: CafesPageProps) {
 const quickIntents = [
   {
     label: "Wifi aman",
-    href: "/cafes?q=wifi kencang",
+    href: "/cafes?useCase=wifi",
     icon: Search,
   },
   {
     label: "Colokan banyak",
-    href: "/cafes?hasSockets=true",
+    href: "/cafes?useCase=sockets",
     icon: PlugZap,
   },
   {
-    label: "Dekat kampus",
-    href: "/cafes?q=kampus",
+    label: "Budget hemat",
+    href: "/cafes?useCase=budget",
     icon: MapPin,
+  },
+  {
+    label: "Kerja serius",
+    href: "/cafes?useCase=coworking",
+    icon: Laptop,
   },
 ];
 
@@ -166,5 +172,26 @@ function getActiveFilterLabels(filters: CafeFilters) {
     labels.push("Parkir lega");
   }
 
+  if (filters.useCase) {
+    labels.push(`Kebutuhan: ${getUseCaseLabel(filters.useCase)}`);
+  }
+
+  if (filters.sort && filters.sort !== "rating") {
+    labels.push(`Urutan: ${filters.sort}`);
+  }
+
   return labels;
+}
+
+function getUseCaseLabel(useCase: Exclude<CafeFilters["useCase"], "" | undefined>) {
+  const labels = {
+    wifi: "Wifi kencang",
+    budget: "Budget",
+    sockets: "Colokan",
+    night: "Buka malam",
+    meeting: "Meeting",
+    coworking: "Coworking",
+  };
+
+  return labels[useCase] ?? useCase;
 }

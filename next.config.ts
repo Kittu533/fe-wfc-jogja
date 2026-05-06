@@ -24,6 +24,15 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "streetviewpixels-pa.googleapis.com",
       },
+      {
+        protocol: "https",
+        hostname: "ssl.gstatic.com",
+      },
+      {
+        protocol: "https",
+        hostname: "urzopqnljdixowrfosgb.supabase.co",
+        pathname: "/storage/v1/object/public/place-images/**",
+      },
     ],
   },
   turbopack: {

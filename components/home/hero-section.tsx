@@ -26,6 +26,7 @@ import {
   itemVariants,
 } from "@/components/home/home-shared";
 import type { CafeListItem, CuratedList } from "@/lib/types";
+import { shouldUnoptimizeImage } from "@/lib/utils/images";
 
 type HeroSectionProps = {
   curatedLists: CuratedList[];
@@ -144,6 +145,7 @@ export function HeroSection({
                       fill
                       sizes="48px"
                       className="object-cover"
+                      unoptimized={shouldUnoptimizeImage(cafe.coverImage)}
                     />
                   </div>
                 ))}
@@ -281,6 +283,7 @@ function PhoneMockup({ cafes }: { cafes: CafeListItem[] }) {
               fill
               sizes="300px"
               className="object-cover transition duration-500 group-hover:scale-105"
+              unoptimized={shouldUnoptimizeImage(leadCafe.coverImage)}
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
             <div className="absolute bottom-4 left-4 right-4">
@@ -323,6 +326,7 @@ function PhoneMockup({ cafes }: { cafes: CafeListItem[] }) {
                     fill
                     sizes="48px"
                     className="object-cover"
+                    unoptimized={shouldUnoptimizeImage(cafe.coverImage)}
                   />
                 </div>
                 <div className="min-w-0 flex-1">

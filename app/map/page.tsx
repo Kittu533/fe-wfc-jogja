@@ -11,6 +11,7 @@ import { MapHero } from "@/components/map/map-hero";
 import { getCafes } from "@/lib/services/cafes";
 import type { CafeListItem } from "@/lib/types";
 import { getPriceLabel } from "@/lib/utils/cafes";
+import { shouldUnoptimizeImage } from "@/lib/utils/images";
 
 export const dynamic = "force-dynamic";
 
@@ -20,7 +21,7 @@ export const metadata: Metadata = {
 };
 
 export default async function MapPage() {
-  const cafes = await getCafes();
+  const cafes = await getCafes({ sort: "rating", limit: 50 });
   const featuredCafes = cafes.items.slice(0, 5);
   const areas = cafes.availableAreas.slice(0, 7);
   const socketReadyCount = cafes.items.filter((cafe) => cafe.amenities.hasSockets).length;
@@ -122,6 +123,7 @@ function MapCafeRow({ cafe }: { cafe: CafeListItem }) {
           fill
           sizes="84px"
           className="object-cover transition duration-700 group-hover:scale-110"
+          unoptimized={shouldUnoptimizeImage(cafe.coverImage)}
         />
         <div className="absolute inset-0 bg-black/5" />
       </div>
@@ -139,7 +141,7 @@ function MapCafeRow({ cafe }: { cafe: CafeListItem }) {
           {cafe.name}
         </p>
         <p className="mt-1 line-clamp-1 text-[11px] font-bold text-emerald-900/40 leading-relaxed">
-          {getPriceLabel(cafe.priceLevel)} · {cafe.tagline}
+          {getPriceLabel(cafe.priceLevel)} · {cafe.wfcRecommendation?.badges[0] ?? cafe.tagline}
         </p>
       </div>
     </Link>

@@ -16,6 +16,7 @@ import {
   Users,
   Check,
   Coffee,
+  Sparkles,
   Utensils
 } from "lucide-react";
 
@@ -25,6 +26,7 @@ import { getCafeBySlug } from "@/lib/services/cafes";
 import { getPriceLabel } from "@/lib/utils/cafes";
 import { RatingStars } from "@/components/rating-stars";
 import { getAverageRating } from "@/lib/utils/cafes";
+import { shouldUnoptimizeImage } from "@/lib/utils/images";
 
 export const dynamic = "force-dynamic";
 
@@ -59,6 +61,7 @@ export default async function CafeDetailPage({ params }: CafeDetailPageProps) {
   }
 
   const avgRating = getAverageRating(cafe.ratingBreakdown);
+  const recommendation = cafe.wfcRecommendation;
 
   return (
     <div className="min-h-screen pb-20">
@@ -68,8 +71,10 @@ export default async function CafeDetailPage({ params }: CafeDetailPageProps) {
           src={cafe.coverImage}
           alt={cafe.name}
           fill
+          sizes="100vw"
           className="object-cover"
           priority
+          unoptimized={shouldUnoptimizeImage(cafe.coverImage)}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
         
@@ -97,6 +102,11 @@ export default async function CafeDetailPage({ params }: CafeDetailPageProps) {
                   <span className="rounded-full bg-white/10 backdrop-blur-md px-3 py-1 text-xs font-bold text-white border border-white/20">
                     {getPriceLabel(cafe.priceLevel)}
                   </span>
+                  {recommendation && (
+                    <span className="rounded-full bg-emerald-400/20 backdrop-blur-md px-3 py-1 text-xs font-black text-emerald-100 border border-emerald-300/30">
+                      WFC {recommendation.score}/100
+                    </span>
+                  )}
                 </div>
                 <h1 className="font-[family-name:var(--font-display)] text-4xl font-black tracking-tight text-white sm:text-6xl">
                   {cafe.name}
@@ -140,6 +150,34 @@ export default async function CafeDetailPage({ params }: CafeDetailPageProps) {
                 ))}
               </div>
             </section>
+
+            {recommendation && (
+              <section className="space-y-6 rounded-[2rem] border border-emerald-100 bg-emerald-50/45 p-6">
+                <div className="flex flex-wrap items-center justify-between gap-4">
+                  <h2 className="text-2xl font-black text-emerald-950 flex items-center gap-3">
+                    <Sparkles className="h-6 w-6 text-emerald-600" />
+                    Kenapa Direkomendasikan
+                  </h2>
+                  <div className="rounded-2xl bg-emerald-700 px-4 py-2 text-sm font-black text-white">
+                    {recommendation.tier.replace("_", " ")} · {recommendation.confidence}
+                  </div>
+                </div>
+                <div className="flex flex-wrap gap-2">
+                  {recommendation.badges.map((badge) => (
+                    <span key={badge} className="rounded-full border border-emerald-200 bg-white px-4 py-2 text-sm font-black text-emerald-800">
+                      {badge}
+                    </span>
+                  ))}
+                </div>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  {recommendation.reasons.map((reason) => (
+                    <div key={reason} className="rounded-2xl bg-white p-4 text-sm font-semibold leading-relaxed text-emerald-900/75">
+                      {reason}
+                    </div>
+                  ))}
+                </div>
+              </section>
+            )}
 
             {/* Amenities Section */}
             <section className="space-y-6">
@@ -212,7 +250,9 @@ export default async function CafeDetailPage({ params }: CafeDetailPageProps) {
                       src={img}
                       alt={`Gallery ${i}`}
                       fill
+                      sizes="(max-width: 768px) 50vw, 384px"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      unoptimized={shouldUnoptimizeImage(img)}
                     />
                   </div>
                 ))}

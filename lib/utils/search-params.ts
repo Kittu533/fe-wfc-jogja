@@ -23,6 +23,8 @@ export function parseCafeFilters(
     hasSockets: truthy(searchParams.hasSockets),
     hasMusholla: truthy(searchParams.hasMusholla),
     hasParking: truthy(searchParams.hasParking),
+    sort: (getSingleSearchParam(searchParams.sort) as CafeFilters["sort"] | undefined) ?? "rating",
+    useCase: (getSingleSearchParam(searchParams.useCase) as CafeFilters["useCase"] | undefined) ?? "",
     page: parsePositiveInteger(searchParams.page, 1),
     limit: parsePositiveInteger(searchParams.limit, 12, 50),
   };

@@ -41,10 +41,19 @@ describe("map view client", () => {
       featureHighlights: cafe.featureHighlights,
       bestFor: cafe.bestFor,
       amenities: cafe.amenities,
+      wfcRecommendation: {
+        score: 88,
+        tier: "excellent" as const,
+        badges: ["Wifi signal", "Punya foto asli"],
+        reasons: ["Rating dan sinyal WFC kuat."],
+        confidence: "high" as const,
+      },
     }));
 
     render(<MapViewClient cafes={cafes} />);
 
     expect(screen.getAllByTestId("map-marker")).toHaveLength(cafes.length);
+    expect(screen.getAllByText("Wifi signal")).toHaveLength(cafes.length);
+    expect(screen.getAllByText("Rating dan sinyal WFC kuat.")).toHaveLength(cafes.length);
   });
 });

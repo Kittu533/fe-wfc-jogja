@@ -31,6 +31,7 @@ export function SiteHeader() {
               src="/logo-wfc.png"
               alt="WFC Jogja Logo"
               fill
+              sizes="64px"
               className="object-contain"
               priority
             />

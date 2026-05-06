@@ -47,6 +47,7 @@ export function CafesHero({ totalResults, areaCount, highRatedCount }: CafesHero
           src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1200&q=80"
           alt="Cafe background"
           fill
+          sizes="100vw"
           className="object-cover opacity-40 mix-blend-overlay brightness-75 transition-transform duration-[20s] hover:scale-110"
           priority
         />

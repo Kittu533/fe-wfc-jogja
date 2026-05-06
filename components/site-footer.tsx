@@ -39,6 +39,7 @@ export function SiteFooter() {
                   src="/logo-wfc.png"
                   alt="WFC Jogja Logo"
                   fill
+                  sizes="128px"
                   className="object-contain"
                 />
               </div>

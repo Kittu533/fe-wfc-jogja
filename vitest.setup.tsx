@@ -331,9 +331,12 @@ beforeEach(() => {
         const q = url.searchParams.get("q")?.toLowerCase();
         const area = url.searchParams.get("area");
         const priceLevel = url.searchParams.get("priceLevel");
+        const useCase = url.searchParams.get("useCase");
         if (q) items = items.filter((item) => `${item.name} ${item.tagline}`.toLowerCase().includes(q));
         if (area) items = items.filter((item) => item.area === area);
         if (priceLevel) items = items.filter((item) => item.priceLevel === priceLevel);
+        if (useCase === "wifi") items = items.filter((item) => item.featureHighlights.some((text) => /wifi/i.test(text)));
+        if (useCase === "sockets") items = items.filter((item) => item.amenities.hasSockets);
         const paginated = paginateItems(items, url);
         return jsonResponse({
           items: paginated.items,
@@ -353,26 +356,26 @@ beforeEach(() => {
       if (url.pathname === "/lists" && method === "GET") {
         return jsonResponse([
           {
-            id: "list-osm-02",
-            slug: "coworking-dan-workspace-jogja",
-            title: "Coworking dan Workspace Jogja",
-            summary: "Tempat kerja serius dari dataset admin.",
-            description: "Kurasi coworking/workspace yang sudah published.",
+            id: "list-wfc-06",
+            slug: "coworking-dan-meeting",
+            title: "Coworking & Meeting",
+            summary: "Tempat kerja serius untuk fokus, meeting, atau tim kecil.",
+            description: "Kurasi otomatis dari kategori coworking, workspace, dan sinyal meeting.",
             heroLabel: "Kerja serius",
             cafeSlugs: ["cronica-creative-workspace", "nilu-coffee"],
           },
         ]);
       }
 
-      if (url.pathname === "/lists/coworking-dan-workspace-jogja" && method === "GET") {
+      if (url.pathname === "/lists/coworking-dan-meeting" && method === "GET") {
         const cafes = [toCafeListItem(adminPlaces[1]), toCafeListItem(adminPlaces[0])];
         const paginated = paginateItems(cafes, url);
         return jsonResponse({
-          id: "list-osm-02",
-          slug: "coworking-dan-workspace-jogja",
-          title: "Coworking dan Workspace Jogja",
-          summary: "Tempat kerja serius dari dataset admin.",
-          description: "Kurasi coworking/workspace yang sudah published.",
+          id: "list-wfc-06",
+          slug: "coworking-dan-meeting",
+          title: "Coworking & Meeting",
+          summary: "Tempat kerja serius untuk fokus, meeting, atau tim kecil.",
+          description: "Kurasi otomatis dari kategori coworking, workspace, dan sinyal meeting.",
           heroLabel: "Kerja serius",
           cafeSlugs: ["cronica-creative-workspace", "nilu-coffee"],
           cafes: paginated.items,

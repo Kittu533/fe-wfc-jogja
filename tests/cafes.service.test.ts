@@ -108,7 +108,7 @@ describe("cafes service", () => {
   });
 
   it("returns curated list items only from that list", async () => {
-    const curatedList = await getCuratedListBySlug("coworking-dan-workspace-jogja");
+    const curatedList = await getCuratedListBySlug("coworking-dan-meeting");
 
     expect(curatedList).toBeTruthy();
     expect(curatedList?.cafes.length).toBeGreaterThan(0);
@@ -120,7 +120,7 @@ describe("cafes service", () => {
   });
 
   it("paginates curated list cafe items", async () => {
-    const curatedList = await getCuratedListBySlug("coworking-dan-workspace-jogja", {
+    const curatedList = await getCuratedListBySlug("coworking-dan-meeting", {
       page: 1,
       limit: 1,
     });
@@ -131,5 +131,12 @@ describe("cafes service", () => {
     expect(curatedList?.totalCafes).toBeGreaterThan(0);
     expect(curatedList?.totalPages).toBeGreaterThan(0);
     expect(curatedList?.cafes).toHaveLength(1);
+  });
+
+  it("passes use-case filters to cafe results", async () => {
+    const result = await getCafes({ useCase: "sockets" });
+
+    expect(result.items.length).toBeGreaterThan(0);
+    expect(result.items.every((cafe) => cafe.amenities.hasSockets)).toBe(true);
   });
 });

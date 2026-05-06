@@ -129,6 +129,7 @@ export function PremiumShowcaseSection({
                       src={premiumImages[0]}
                       alt={curatedLists[0].title}
                       fill
+                      sizes="(max-width: 768px) 100vw, 66vw"
                       className="object-cover opacity-60 transition-transform duration-1000 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-950/10 to-transparent" />
@@ -170,6 +171,7 @@ export function PremiumShowcaseSection({
                       src={premiumImages[idx + 1]}
                       alt={list.title}
                       fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
                       className="object-cover opacity-20 transition-transform duration-1000 group-hover:scale-110 group-hover:opacity-30"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-emerald-50 via-transparent to-transparent opacity-80" />

@@ -73,6 +73,10 @@ export function matchesCafeFilters(
     return false;
   }
 
+  if (filters.useCase && !matchesUseCase(cafe, filters.useCase)) {
+    return false;
+  }
+
   return true;
 }
 
@@ -92,5 +96,26 @@ export function toCafeListItem(cafe: CafeDetail): CafeListItem {
     featureHighlights: cafe.featureHighlights,
     bestFor: cafe.bestFor,
     amenities: cafe.amenities,
+    wfcRecommendation: cafe.wfcRecommendation,
   };
+}
+
+function matchesUseCase(cafe: CafeListItem, useCase: NonNullable<CafeFilters["useCase"]>) {
+  const haystack = [
+    cafe.priceLevel,
+    ...cafe.bestFor,
+    ...cafe.featureHighlights,
+    ...(cafe.wfcRecommendation?.badges ?? []),
+    ...(cafe.wfcRecommendation?.reasons ?? []),
+  ]
+    .join(" ")
+    .toLowerCase();
+
+  if (useCase === "wifi") return /wifi|internet|wfc/.test(haystack);
+  if (useCase === "budget") return cafe.priceLevel === "murah" || /budget|murah|hemat|mahasiswa/.test(haystack);
+  if (useCase === "sockets") return cafe.amenities.hasSockets || /colokan|socket|stop kontak/.test(haystack);
+  if (useCase === "night") return /24\s*jam|malam|tutup pukul 0[0-5]/.test(haystack);
+  if (useCase === "meeting") return /meeting|workspace|ruang kerja/.test(haystack);
+  if (useCase === "coworking") return /coworking|workspace/.test(haystack);
+  return true;
 }

@@ -1,11 +1,16 @@
 import Image from "next/image";
 import Link from "next/link";
+import { ArrowRight, Sparkles } from "lucide-react";
 
 import { RatingStars } from "@/components/rating-stars";
 import { getPriceLabel } from "@/lib/utils/cafes";
+import { shouldUnoptimizeImage } from "@/lib/utils/images";
 import type { CafeListItem } from "@/lib/types";
 
-export function CafeCard({ cafe }: { cafe: CafeListItem }) {
+export function CafeCard({ cafe, priority = false }: { cafe: CafeListItem; priority?: boolean }) {
+  const recommendation = cafe.wfcRecommendation;
+  const primaryBadge = recommendation?.badges[0] ?? "WFC kandidat";
+
   return (
     <article className="group relative flex h-full flex-col overflow-hidden rounded-[2.5rem] bg-white transition-all duration-500 hover:-translate-y-1 hover:shadow-[0_20px_50px_-15px_rgba(6,78,59,0.12)] border border-emerald-100/50">
       <div className="relative aspect-[4/3] overflow-hidden">
@@ -15,6 +20,8 @@ export function CafeCard({ cafe }: { cafe: CafeListItem }) {
           fill
           className="object-cover transition-transform duration-1000 group-hover:scale-105"
           sizes="(max-width: 768px) 100vw, 33vw"
+          priority={priority}
+          unoptimized={shouldUnoptimizeImage(cafe.coverImage)}
         />
         <div className="absolute top-4 left-4 flex gap-2">
           <span className="backdrop-blur-md bg-white/70 px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-emerald-950">
@@ -26,6 +33,17 @@ export function CafeCard({ cafe }: { cafe: CafeListItem }) {
              <span className="text-[10px] font-black text-white">{cafe.rating.toFixed(1)}</span>
           </div>
         </div>
+        {recommendation && (
+          <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between gap-3 rounded-2xl border border-white/35 bg-white/80 px-3 py-2 text-emerald-950 shadow-lg backdrop-blur-md">
+            <span className="inline-flex min-w-0 items-center gap-1.5 text-[11px] font-black">
+              <Sparkles className="h-3.5 w-3.5 shrink-0 text-emerald-600" />
+              <span className="truncate">{primaryBadge}</span>
+            </span>
+            <span className="shrink-0 rounded-full bg-emerald-700 px-2 py-1 text-[10px] font-black text-white">
+              {recommendation.score}/100
+            </span>
+          </div>
+        )}
       </div>
 
       <div className="flex flex-1 flex-col p-6">
@@ -41,7 +59,7 @@ export function CafeCard({ cafe }: { cafe: CafeListItem }) {
         </div>
         
         <p className="line-clamp-2 text-sm font-medium leading-relaxed text-emerald-900/50 mb-6">
-          {cafe.tagline}
+          {recommendation?.reasons[0] ?? cafe.tagline}
         </p>
 
         <div className="mt-auto pt-4 border-t border-emerald-50/50 flex items-center justify-between">
@@ -51,7 +69,7 @@ export function CafeCard({ cafe }: { cafe: CafeListItem }) {
             className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-emerald-50 text-emerald-700 group-hover:bg-emerald-600 group-hover:text-white transition-all shadow-sm"
           >
             <span className="sr-only">Detail</span>
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14m-7-7 7 7-7 7"/></svg>
+            <ArrowRight className="h-4 w-4" strokeWidth={3} />
           </Link>
         </div>
       </div>

@@ -106,6 +106,7 @@ export function DiscoveryBoardSection() {
                   src={item.img}
                   alt={item.title}
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                   className="absolute inset-0 object-cover opacity-50 transition-transform duration-1000 group-hover:scale-110 group-hover:opacity-30"
                 />
                 

@@ -78,14 +78,14 @@ describe("app pages smoke", () => {
     render(
       await CuratedListDetailPage({
         params: Promise.resolve({
-          slug: "coworking-dan-workspace-jogja",
+          slug: "coworking-dan-meeting",
         }),
       }),
     );
 
     expect(
       screen.getByRole("heading", {
-        name: "Coworking dan Workspace Jogja",
+        name: "Coworking & Meeting",
       }),
     ).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Crônica Creative Workspace" })).toBeInTheDocument();

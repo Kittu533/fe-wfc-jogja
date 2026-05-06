@@ -8,6 +8,7 @@ import { ArrowRight, Sparkles } from "lucide-react";
 import { CafeCard } from "@/components/cafe-card";
 import { ScrollVibe } from "@/components/home/scroll-vibe";
 import type { CafeListItem } from "@/lib/types";
+import { shouldUnoptimizeImage } from "@/lib/utils/images";
 
 export function FeaturedSection({ featuredCafes }: { featuredCafes: CafeListItem[] }) {
   const spotlightCafe = featuredCafes[0];
@@ -57,7 +58,9 @@ export function FeaturedSection({ featuredCafes }: { featuredCafes: CafeListItem
                   src={spotlightCafe.coverImage}
                   alt={spotlightCafe.name}
                   fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
                   className="absolute inset-0 h-full w-full object-cover transition-transform duration-1000 group-hover:scale-105"
+                  unoptimized={shouldUnoptimizeImage(spotlightCafe.coverImage)}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-emerald-950/90 via-emerald-950/20 to-transparent" />
 

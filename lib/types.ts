@@ -1,4 +1,16 @@
 export type PriceLevel = "murah" | "menengah" | "premium";
+export type CafeSort = "recommended" | "rating" | "reviews" | "newest";
+export type CafeUseCase = "wifi" | "budget" | "sockets" | "night" | "meeting" | "coworking";
+export type WfcRecommendationTier = "excellent" | "good" | "okay" | "needs_review";
+export type WfcRecommendationConfidence = "high" | "medium" | "low";
+
+export type WfcRecommendation = {
+  score: number;
+  tier: WfcRecommendationTier;
+  badges: string[];
+  reasons: string[];
+  confidence: WfcRecommendationConfidence;
+};
 
 export type RatingBreakdown = {
   food: number;
@@ -53,6 +65,7 @@ export type CafeBase = {
   featureHighlights: string[];
   bestFor: string[];
   amenities: CafeAmenityMap;
+  wfcRecommendation?: WfcRecommendation;
 };
 
 export type CafeListItem = CafeBase & {
@@ -90,6 +103,8 @@ export type CafeFilters = {
   hasSockets?: boolean;
   hasMusholla?: boolean;
   hasParking?: boolean;
+  sort?: CafeSort;
+  useCase?: CafeUseCase | "";
   page?: number;
   limit?: number;
 };
